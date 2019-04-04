@@ -1,0 +1,10 @@
+Package: disdat
+Type: Package
+Title: Data for evaluating species distribution modelling methods
+Version: 0.1
+Date: 27-March-2010
+Author: Jane Elith, Catherine Graham, Robert Hijmans, Steven Phillips
+Maintainer: Robert Hijmans <r.hijmans@gmail.com>
+Description: Data sets for testing species distribution models
+License: GPL (>=3)
+LazyLoad: yes
