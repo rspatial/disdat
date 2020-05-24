@@ -1,16 +1,13 @@
 \name{SWI}
 
 \alias{SWI}
-%\alias{SWItrain}
-%\alias{SWIbackground}
-%\alias{SWItest}
 
 \docType{data}
 
 \title{Swiss species distribution data}
 
 \description{
-Species occurence data for 30 tree species in Switzerland (SWI, a country in Europe) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (SWItrain_po and SWItrain_bg) and test (SWItest_pa, SWItest_env) data:
+Species occurrence data for 30 tree species in Switzerland (SWI, a country in Europe) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (SWItrain_po and SWItrain_bg) and test (SWItest_pa, SWItest_env) data:
 
 SWItrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (tree), and site values for 13 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.
 
@@ -53,28 +50,27 @@ swb  \tab  Site water balance  \tab  mm  \tab  Continuous   \cr
 tavecc  \tab  Average temperature of the coldest month   \tab  degrees C  \tab  Continuous   \cr
 
 topo  \tab  Topographic position  \tab  dimensionless   \tab  Continuous   \cr
-
-
-
+}
 }
 
-}
-
-\usage{
-disData('SWI')
-}
-
-\author{
-Environmental predictors supplied by Niklaus E. Zimmermann. Species data supplied by Niklaus E. Zimmermann, Thomas Wohlgemuth and Meinrad Abegg.
-}
 
 \source{
-See reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
+Environmental predictors supplied by Niklaus E. Zimmermann. Species data supplied by Niklaus E. Zimmermann, Thomas Wohlgemuth and Meinrad Abegg.
+
+See the reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
 }
 
 \references{
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
 }
+
+
+\examples{
+library(disdat)
+x <- disData("SWI")
+sapply(x, head)
+}
+
 
 \keyword{datasets}
 

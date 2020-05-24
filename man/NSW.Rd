@@ -1,9 +1,6 @@
 \name{NSW}
 
 \alias{NSW}
-%\alias{NSWtrain}
-%\alias{NSWbackground}
-%\alias{NSWtest}
 
 
 \docType{data}
@@ -11,15 +8,15 @@
 \title{New South Wales species distribution data}
 
 \description{
-Species occurrence data for 54 species from 8 biological groups in New South Wales (NSW, a state in Australia) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (NSWtrain_po and NSWtrain_bg) and test (NSWtest_pa, NSWtest_env) data:
+Species occurrence data for 54 species from 8 biological groups in New South Wales (NSW, a state in Australia) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-NSWtrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.
 
-NSWtrain_bg has 10000 sites selected at random across the study region. It is structured identically to NSWtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to NSWtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
 
-NSWtest_env includes site names, coordinates, and site values for 13 environmental variables (below). Since these survey data come from different surveys for each biological group (from 570 to 2075 sites per group), there are eight separate files that can be called from the \code{disData} and \code{getDisData} functions. This set of files is suited to making predictions. 
+\code{env} includes site names, coordinates, and site values for 13 environmental variables (below). Since these survey data come from different surveys for each biological group (from 570 to 2075 sites per group), there are eight separate files that can be called from the \code{disData} and \code{getDisData} functions. This set of files is suited to making predictions. 
 
-NSWtest_pa includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as NSWtest_env, and again there are separate files for each group. This set of files is suited to evaluating the predictions made to NSWtest_env.
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as NSWtest_env, and again there are separate files for each group. This set of files is suited to evaluating the predictions made to NSWtest_env.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details. 
 
@@ -59,18 +56,19 @@ vegsys   \tab broad vegetation type \tab 1 = Rainforest, 2 = Moist open forest, 
 }
 }
 
-\usage{
-disData('NSW')
-}
-
-\author{Simon Ferrier and colleagues}
 
 \source{
 All data were compiled and provided by Simon Ferrier and colleagues.
 }
 
 \references{
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+}
+
+
+\examples{
+x <- disData('NSW')
+sapply(x, head)
 }
 
 \keyword{datasets}

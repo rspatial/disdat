@@ -1,9 +1,6 @@
 \name{CAN}
 
 \alias{CAN}
-%\alias{CANtrain}
-%\alias{CANbackground}
-%\alias{CANtest}
 
 \docType{data}
 
@@ -44,20 +41,21 @@ watdist  \tab  Distance from Hudson Bay  \tab  m  \tab  Continuous \cr
 }
 }
 
-\usage{
-disData('CAN')
-}
-
-\author{
-Environmental predictors prepared by Falk Huettmann, Jane Elith and Catherine Graham. Species data: PO from the Ontario Nest Records database, Royal Ontario Museum (ROM) and supplied by M. Peck to Falk Huettmann;  PA from Breeding Bird Atlas for Ontario, provided by M. Cadman to Falk Huettmann.
-}
 
 \source{
-See reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
+Environmental predictors prepared by Falk Huettmann, Jane Elith and Catherine Graham. Species data: PO from the Ontario Nest Records database, Royal Ontario Museum (ROM) and supplied by M. Peck to Falk Huettmann;  PA from Breeding Bird Atlas for Ontario, provided by M. Cadman to Falk Huettmann.
+
+See the reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
 }
 
 \references{
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+}
+
+
+\examples{
+x <- disData('CAN')
+sapply(x, head)
 }
 
 \keyword{datasets}

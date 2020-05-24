@@ -1,9 +1,6 @@
 \name{NZ}
 
 \alias{NZ}
-%\alias{NZtrain}
-%\alias{NZbackground}
-%\alias{NZtest}
 
 \docType{data}
 
@@ -46,20 +43,19 @@ vpd  \tab  Mean October vapor pressure deficit at 9 AM  \tab  kPa  \tab  Continu
 
 }
 
-\usage{
-disData('NZ')
-}
-
-\author{
-Environmental predictors provided by Jake Overton. Species data supplied by Jake Overton and Susan Wiser, from Allan Herbarium and National Vegetation Survey databank.
-}
-
 \source{
-See reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
+Environmental predictors provided by Jake Overton. Species data supplied by Jake Overton and Susan Wiser, from Allan Herbarium and National Vegetation Survey databank.
+
+See the reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
 }
 
 \references{
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+}
+
+\examples{
+x <- disData('NZ')
+sapply(x, head)
 }
 
 \keyword{datasets}

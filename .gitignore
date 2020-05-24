@@ -1,4 +1,5 @@
-inst
+inst/extdata
+!inst/extdata/CAN*
 *.tar.gz
 *Rcheck/
 *.o

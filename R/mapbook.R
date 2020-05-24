@@ -20,7 +20,7 @@ spMapBook <- function(region, output_pdf, map_theme = "classic", verbose = TRUE)
       warning('unknown region: ', r)
     }
     # reading the spatial polygon
-    poly <- getBorder(r)
+    poly <- disBorder(r)
     base_plot <- tmap::tm_shape(poly) + 
       tmap::tm_polygons() + 
       tmap::tm_grid(lwd = 0.2, labels.inside.frame = FALSE, alpha = 0.4, projection = "longlat",

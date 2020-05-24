@@ -30,7 +30,7 @@ Package by Robert J. Hijmans, Roozbeh Valavi, and Jane Elith. Data collation and
 The main reference for the this data set is:
 
 \itemize{
-    \item{Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in review) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.}
+    \item{Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in review) Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.}
 }
 
 

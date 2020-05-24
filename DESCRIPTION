@@ -3,15 +3,19 @@ Type: Package
 Title: Data for Comparing Species Distribution Modeling Methods
 Version: 0.1-2
 Date: 2019-12-02
-Author: Robert J. Hijmans, Roozbeh Valavi, and Jane Elith
 Maintainer: Roozbeh Valavi <valavi.r@gmail.com>
 Description: Data sets for testing species distribution models.
 License: GPL (>=3)
 Encoding: UTF-8
 LazyLoad: yes
 Depends: R (>= 3.5.0)
-Imports: sf (>= 0.8-0), tmap, grid
-Suggests: knitr, rmarkdown
+Suggests: knitr, rmarkdown, sf, terra, raster, rgdal, tmap, grid
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-12-12 02:44:20 UTC; rvalavi
+Authors@R: c(
+	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
+			email = "r.hijmans@gmail.com", comment = c(ORCID = "0000-0001-5872-2872")),
+    person("Roozbeh", "Valavi", role = "aut"),
+    person("Jane", "Elith",  role = "aut"))
+
+

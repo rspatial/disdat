@@ -1,9 +1,6 @@
 \name{SA}
 
 \alias{SA}
-%\alias{SAtrain}
-%\alias{SAbackground}
-%\alias{SAtest}
 
 \docType{data}
 
@@ -43,25 +40,23 @@ sabio15  \tab  Precipitation Seasonality (Coefficient of Variation)  \tab  mm  \
 sabio17  \tab  Precipitation of Driest Quarter  \tab  mm  \tab  Continuous  \cr
 sabio18  \tab  Precipitation of Warmest Quarter  \tab  mm  \tab  Continuous  \cr
 }
-
-
-
 }
 
-\usage{
-disData('SA')
-}
-
-\author{
-Environmental data prepared by Bette Loiselle, Lucia Lohmann and Catherine Graham. Species supplied by Bette Loiselle and Lucia Lohmann. PO data from the Missouri Botanical Gardens database and Lucia Lohmann; PA data collected by Al Gentry.
-}
 
 \source{
-See reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
+Environmental data prepared by Bette Loiselle, Lucia Lohmann and Catherine Graham. Species supplied by Bette Loiselle and Lucia Lohmann. PO data from the Missouri Botanical Gardens database and Lucia Lohmann; PA data collected by Al Gentry.
+
+See the reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
 }
 
 \references{
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+}
+
+
+\examples{
+x <- disData('SA')
+sapply(x, head)
 }
 
 \keyword{datasets}
