@@ -10,11 +10,9 @@ Data for species distribution modeling
 }
 
 \description{
-This package consists of a collection of datasets that can be used to compare species distribution models. There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models.
+This package allows for easy use of a collection of datasets that can be used to compare species distribution models. There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models.
 
 The data were compiled and used by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA. Full details of the dataset are provided in the first publication listed below, from the NCEAS data group. 
-
-The package also includes helper functions to load or get the data, and to generate a pdf booklet of mapped records. 
 }
 
 \details{
@@ -23,14 +21,14 @@ The data are fully described in the first publication listed below, and also sup
 
 
 \author{
-Package by Robert J. Hijmans, Roozbeh Valavi, and Jane Elith. Data collation and processing by the NCEAS data group (see first reference below). 
+Package by Robert J. Hijmans, Roozbeh Valavi, and Jane Elith. Data collation and processing by the NCEAS data group (see first reference below, and the manual package for specific datasets). 
 }
 
 \references{
-The main reference for the this data set is:
+The main reference for the these data is:
 
 \itemize{
-    \item{Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in review) Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.}
+    \item{Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In Press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.}
 }
 
 

@@ -7,18 +7,18 @@
 \title{New Zealand species distribution data}
 
 \description{
-Species occurrence data for 52 vascular plant species - mostly trees and shrubs from indigenous forests -  in New Zealand (NZ), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (NZtrain_po and NZtrain_bg) and test (NZtest_pa, NZtest_env) data:
+Species occurrence data for 52 vascular plant species - mostly trees and shrubs from indigenous forests -  in New Zealand (NZ), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-NZtrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant), and site values for 13 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant), and site values for 13 environmental variables (below). 
 
-NZtrain_bg has 10000 sites selected at random across the study region. It is structured identically to NZtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
-NZtest_env includes site names, coordinates, and site values for 13 environmental variables (below), at 19120 sites. This file is suited to making predictions. 
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to NZtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
+\code{env} includes site names, coordinates, and site values for 13 environmental variables (below), at 19120 sites. These data are suited to making predictions. 
 
-NZtest_pa includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as NZtest_env. This file is suited to evaluating the predictions made to NZtest_env.
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details. 
 
-The reference system of the x and y coordinates is New Zealand Map Grid (NZMG), Datum: NZGD49 (New Zealand Geodetic Datum 1949), Ellipsoid: International 1924 (EPSG:27200).
+The coordinate reference system of the x and y coordinates is New Zealand Map Grid (NZMG), Datum: NZGD49 (New Zealand Geodetic Datum 1949), Ellipsoid: International 1924 (EPSG:27200).
 
 The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
 

@@ -7,15 +7,15 @@
 \title{Canadian bird species distribution data}
 
 \description{
-Species occurrence data for 20 bird species from Ontario, a province in Canada (CAN), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (CANtrain_po and CANtrain_bg) and test (CANtest_pa, CANtest_env) data:  
+Species occurrence data for 20 bird species from Ontario, a province in Canada (CAN), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:  
 
-CANtrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (bird), and site values for 11 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.  
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (bird), and site values for 11 environmental variables (below).   
 
-CANtrain_bg has 10000 sites selected at random across the study region. It is structured identically to CANtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group.   
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to CANtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group.   
 
-CANtest_env includes site names, coordinates, and site values for 11 environmental variables (below), at 14571 sites. This file is suited to making predictions.   
+\code{env} includes site names, coordinates, and site values for 11 environmental variables (below), at 14571 sites. This file is suited to making predictions.   
 
-CANtest_pa includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as CANtest_env. This file is suited to evaluating the predictions made to CANtest_env.
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details. 
 

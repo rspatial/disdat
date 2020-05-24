@@ -7,15 +7,15 @@
 \title{Swiss species distribution data}
 
 \description{
-Species occurrence data for 30 tree species in Switzerland (SWI, a country in Europe) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (SWItrain_po and SWItrain_bg) and test (SWItest_pa, SWItest_env) data:
+Species occurrence data for 30 tree species in Switzerland (SWI, a country in Europe) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-SWItrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (tree), and site values for 13 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (tree), and site values for 13 environmental variables (below). 
 
-SWItrain_bg has 10000 sites selected at random across the study region. It is structured identically to SWItrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
 
-SWItest_env includes site names, coordinates, and site values for 13 environmental variables (below), at 10103 sites. This file is suited to making predictions. 
+\code{env} includes site names, coordinates, and site values for 13 environmental variables (below), at 10103 sites. This file is suited to making predictions. 
 
-SWItest_pa includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as SWItest_env. This file is suited to evaluating the predictions made to SWItest_env.
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details. 
 

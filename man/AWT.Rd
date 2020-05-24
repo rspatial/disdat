@@ -15,7 +15,7 @@ Species occurrence data for 40 species (20 vascular plants, 20 birds) in the Aus
 
 \code{env} includes site names, coordinates, and site values for 13 environmental variables (below). Since these survey data come from different surveys for plants (102 sites) and birds (340 sites), they are returned in separate datasets by \code{getDisData}. These data are suited to make predictions to. 
 
-\code{pa} includes site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{getDisData}). The sites are identical, and in the same order, as \code{env}. These data are suited to evaluating the predictions made with \code{env}.  
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{disPa}). The sites are identical to the sites in \code{env}. These data are suited to evaluating the predictions made with \code{env}.  
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details. 
 

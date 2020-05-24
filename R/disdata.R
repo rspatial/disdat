@@ -54,7 +54,6 @@ disData <- function(region) {
 		po <- readRDS(grep("train_po", f, value=TRUE))
 		x <- list(env=env, pa=pa, bg=bg, po=po) 			
 	}
-	x
 }
 
 
@@ -105,51 +104,9 @@ getDisData <- function(region, dataset, type, group = NULL) {
 }
 
 
-disBorder <- function(region, pkg="sf"){
 
-	region <- .checkRegion(region)
-	r <- tolower(region)
-	path <- .pkgPath("borders")
-	
-	d <- file.path(path, paste0(r, ".gpkg"))
-	if (pkg == "sf") {
-		bor <- sf::st_read(d, quiet = TRUE)
-	} else if (pkg == "sp") {
-		bor <- rgdal::readOGR(d, verbose=FALSE)
-	} else {
-		bor <- terra::vect(d, quiet = TRUE)		
-	}
-	return(bor)
-}
-
-
-disPredictors <- function(region) {
-	region <- .checkRegion(region)
-	f <- file.path(.pkgPath(), paste0(region, "train_po.rds"))
-	colnames(readRDS(f))[-c(1:6)]
-
-	#if (region=="AWT") {
-	#	return( c("bc01", "bc04", "bc05", "bc06", "bc12", "bc15", "bc17", "bc20", "bc31", "bc33", "slope", "topo", "tri") )
-	#} else if (region=="CAN") {
-	#	return( c("alt", "asp2", "ontprec", "ontprec4", "ontprecsd", "ontslp", "onttemp", "onttempsd", "onttmin4", "ontveg", "watdist") )
-	#} else if (region=="NSW") {
-	#	return( c("disturb", "mi", "rainann", "rugged", "soildepth", "soilfert", "solrad", "tempann", "topo", "vegsys", "cti", "raindq", "tempmin" ))
-	#} else if (region=="NZ") { 
-	#	return( c("age", "deficit", "dem", "hillshade", "mas", "mat", "r2pet", "rain", "slope", "sseas", "toxicats", "tseas", "vpd")	)
-	#} else if (region=="SA") {
-	#	return( c("sabio1", "sabio2", "sabio4", "sabio5", "sabio6", "sabio7", "sabio8", "sabio12", "sabio15", "sabio17", "sabio18") )
-	#} else if (region=="SWI") {
-	#	return( c("bcc", "calc", "ccc", "ddeg", "nutri", "pday", "precyy", "sfroyy", "slope", "sradyy", "swb", "tavecc", "topo") )
-	#}
-}
-
-
-disCRS <- function(region) {
-	region <- .checkRegion(region)
-	if (region=="AWT") {
-		"+proj=utm +zone=55 +south +ellps=GRS80"
-	} else {
-		"+proj=longlat +datum=WGS84"
-	}
-}
+disPo <- function(region) { getDisData(region, "train", "po") }
+disBg <- function(region) { getDisData(region, "train", "bg") }
+disPa <- function(region, group) { getDisData(region, "test", "pa", group) }
+disEnv <- function(region, group) { getDisData(region, "test", "env", group) }
 
