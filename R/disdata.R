@@ -1,52 +1,93 @@
-# Author: Robert J. Hijmans
-# contact: r.hijmans@gmail.com
-# Date : March 2010
+# Author: Robert J. Hijmans and Roozbeh Valavi
+# contact: valavi.r@gmail.com
+# Date : December 2019
 # Version 0.1
 # Licence GPL v3
 
-disData <- function(...) {
-	args <- unique(toupper(unlist(list(...))))
-	if (length(args) == 0) { 
-		args = 'ALL' 
-	}
-	if (args[1] == 'ALL') {
-		args <- c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')
-	}
-	path = system.file("data", package="disdat")
-	for (i in 1:length(args)) {
-		r = toupper(args[[i]])
-		if (! r %in% c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')) {
-			warning('unknown region:', r)
-		} else {
-			dd <- c('train', 'background', 'test')
-			for (j in 1:3) {
-				d <- paste0(path, '/', r, dd[i], '.rds')
-				res <- readRDS(d[j])
-				objname <- paste0(r, dd[i])
-				assign(objname, res, envir = .GlobalEnv)
-			}
-		}
-	}
+disData <- function(...){
+  args <- unique(toupper(unlist(list(...))))
+  if(length(args) == 0){ 
+    args = 'ALL' 
+  }
+  if(args[1] == 'ALL'){
+    args <- c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')
+  }
+  path <- system.file("extdata", package="disdat")
+  for(i in 1:length(args)){
+    r <- toupper(args[[i]])
+    if(! r %in% c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')){
+      warning('unknown region: ', r)
+    } else{
+      dd <- list.files(path)[grep(r, list.files(path))]
+      if(length(dd) > 4) message("Notice the test dataset for ", r, " region has more than one group")
+      for(j in 1:length(dd)){
+        d <- paste0(path, '/', dd[j])
+        res <- readRDS(d)
+        objname <- substr(dd[j], 1, nchar(dd[j])-4)
+        assign(objname, res, envir = .GlobalEnv)
+      }
+    }
+  }
 }
 
 
-getDisData <- function(region, type) {
-	region = toupper(region[1])
-	type = tolower(type[1])
-	regions = c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')
-	if (! region %in% regions) {
-		stop('unknown region: ', region, '. Should be one of: ', regions)
-	}
-	types = c('train', 'test', 'background')
-	if (! type %in% types ) {
-		stop('unknown data type: ', type, '. Shoud be one of: ', types)
-	}
-	path = system.file("data", package="disdat")
-	x = paste(path, '/', region, type, '.rds', sep='')
-	#thisenvir = new.env()
-	#d <- get(load(x, thisenvir), thisenvir)
-	d <- readRDS(x)
-	return(d)
+getDisData <- function(region, dataset, type, group = NULL) {
+  region <- toupper(region[1])
+  dataset <- tolower(dataset[1])
+  type <- tolower(type[1])
+  if(dataset == 'train'){group <- NULL}
+  regions <- c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')
+  if (! region %in% regions) {
+    stop('unknown region: ', region, '. Should be one of: ', paste(regions, collapse = " "))
+  }
+  datasets <- c('train', 'test')
+  if (! dataset %in% datasets ) {
+    stop('unknown dataset: ', dataset, '. Shoud be one of: ', paste(datasets, collapse = " "))
+  }
+  if(dataset == 'train' && ! type %in% c('po', 'bg')){
+    stop('unknown type for train dataset', '. Shoud be one of: ', paste(c('po', 'bg'), collapse = " "))
+  }
+  if(dataset == 'test' && ! type %in% c('env', 'pa')){
+    stop('unknown type for test dataset', '. Shoud be one of: ', paste(c('pa', 'env'), collapse = " "))
+  }
+  if(region %in% c('AWT', 'NSW') && dataset == 'test' && is.null(group)){
+    stop('You should specify a group for test dataset in AWT and NSW regions')
+  }
+  if(!is.null(group)){
+    group <- tolower(group[1])
+    groupAWT <- c('bird', 'plant')
+    if(region == 'AWT' && ! group %in% groupAWT){
+      stop('unknown group for AWT region: ', group, '. Shoud be one of: ', paste(groupAWT, collapse = " "))
+    }
+    groupNSW <- c('ba', 'db', 'nb', 'ot', 'ou', 'rt', 'ru', 'sr')
+    if(region == 'NSW' && ! group %in% groupNSW){
+      stop('unknown group for NSW region: ', group, '. Shoud be one of: ', paste(groupNSW, collapse = " "))
+    }
+  }
+  path <- system.file("extdata", package="disdat")
+  if(is.null(group)){
+    x <- paste0(path, '/', region, dataset, '_', type, '.rds')
+  } else{
+    x <- paste0(path, '/', region, dataset, '_', type, '_', group, '.rds')
+  }
+  #thisenvir = new.env()
+  #d <- get(load(x, thisenvir), thisenvir)
+  d <- readRDS(x)
+  return(d)
+}
+
+
+getBorder <- function(region){
+  r <- tolower(region)
+  path <- system.file("extdata/borders", package="disdat")
+  if(! r %in% c('awt', 'can', 'nsw', 'nz', 'sa', 'swi')){
+    warning('unknown region: ', r)
+  } else{
+    dd <- list.files(path)[grep(r, list.files(path))]
+    d <- paste0(path, '/', dd)
+    bor <- sf::st_read(d, quiet = TRUE)
+    return(bor)
+  }
 }
 
 

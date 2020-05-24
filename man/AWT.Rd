@@ -1,8 +1,9 @@
 \name{AWT}
 
-\alias{AWTtrain}
-\alias{AWTbackground}
-\alias{AWTtest}
+\alias{AWT}
+%\alias{AWTtrain}
+%\alias{AWTbackground}
+%\alias{AWTtest}
 
 
 \docType{data}
@@ -10,42 +11,57 @@
 \title{Australian Wet Tropics species distribution data}
 
 \description{
-Species occurrence data for 40 species (20 plants, 20 birds) in the Australian Wet Tropics (AWT) and associated environmental data. There are three data sets with training (AWTtrain), background (AWTbackground), and test (AWTtest) data. The training data principally consist of environmental variables at locations where the species where observed (presence only), and at random locations for background data. The test data are presence/absence observations of the same species, independent from the training data.
+Species occurrence data for 40 species (20 vascular plants, 20 birds) in the Australian Wet Tropics (AWT) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (AWTtrain_po and AWTtrain_bg) and test (AWTtest_pa, AWTtest_env) data:
 
+AWTtrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant or bird), and site values for 13 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.
 
-The reference system of the x and y coordinates is UTM, zone 55, spheroid grs1980, datum GDA94
+AWTtrain_bg has 10000 sites selected at random across the study region. It is structured identically to AWTtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
 
-Environmental variables:
+AWTtest_env includes site names, coordinates, and site values for 13 environmental variables (below). Since these survey data come from different surveys for plants (102 sites) and birds (340 sites), there are two separate files that can be called from the \code{disData} and \code{getDisData} functions.  These files are suited to making predictions. 
+
+AWTtest_pa includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as AWTtest_env, and again there are separate files for each group. These files are suited to evaluating the predictions made to AWTtest_env.  
+
+Raster (gridded) data for all environmental variables are available - see the reference below for details. 
+
+The reference system of the x and y coordinates is UTM, zone 55, spheroid GRS 1980, datum GDA94 (EPSG:28355).
+
+The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
+
+\strong{Environmental variables:}
 \tabular{llll}{  
-Code  \tab Description                \tab Units \tab Type  \cr
-bc01  \tab Annual mean temperature    \tab degrees C \tab Continous  \cr
-bc04  \tab Temperature seasonality    \tab dimensionless \tab Continous  \cr
-bc05  \tab Max. temperature of warmest period     \tab degrees C  \tab Continous  \cr
-bc06  \tab Min. temperature of coldest period     \tab  degrees C  \tab Continous  \cr
-bc12  \tab Annual precipitation       \tab mm     \tab  Continous  \cr
-bc15  \tab Precipitation seasonality  \tab dimensionless \tab Continous  \cr
-bc17  \tab Precipitation of driest quarter \tab mm \tab Continous  \cr
-bc20  \tab Annual mean radiation      \tab MJ/m2/day \tab Continous  \cr
-bc31  \tab Moisture index seasonality \tab dimensionless \tab Continous \cr 
-bc33  \tab Mean moisture index of lowest quarter (MI) \tab dimensionless \tab Continous \cr
-slope \tab Slope                      \tab percent \tab Continous \cr
-topo  \tab Topographic position       \tab 0 is a gully and 100 a ridge, 50 mid-slope  \tab Continous \cr
-tri   \tab Terrain ruggedness index	  \tab Sum of variation in a 1 km moving window \tab Continous \cr
+\strong{Code}  \tab \strong{Description}  \tab \strong{Units} \tab \strong{Type}  \cr
+bc01  \tab Annual mean temperature    \tab degrees C \tab Continuous  \cr
+bc04  \tab Temperature seasonality    \tab dimensionless \tab Continuous  \cr
+bc05  \tab Max. temperature of warmest period     \tab degrees C  \tab Continuous  \cr
+bc06  \tab Min. temperature of coldest period     \tab  degrees C  \tab Continuous  \cr
+bc12  \tab Annual precipitation       \tab mm     \tab  Continuous  \cr
+bc15  \tab Precipitation seasonality  \tab dimensionless \tab Continuous  \cr
+bc17  \tab Precipitation of driest quarter \tab mm \tab Continuous  \cr
+bc20  \tab Annual mean radiation      \tab MJ/m2/day \tab Continuous  \cr
+bc31  \tab Moisture index seasonality \tab dimensionless \tab Continuous \cr 
+bc33  \tab Mean moisture index of lowest quarter (MI) \tab dimensionless \tab Continuous \cr
+slope \tab Slope                      \tab percent \tab Continuous \cr
+topo  \tab Topographic position       \tab 0 is a gully and 100 a ridge, 50 mid-slope  \tab Continuous \cr
+tri   \tab Terrain ruggedness index	  \tab Sum of variation in a 1 km moving window \tab Continuous \cr
 }
 
 
 }
 
 \usage{
-data(AWTtrain)
-data(AWTbackground)
-data(AWTtest)
+disData('AWT')
 }
 
-\author{Andrew Ford (CSIRO), Steven Williams, Karen Richardson (UQ Brisbane)}
+\author{
+Environmental predictors prepared by Karen Richardson, Caroline Bruce and Catherine Graham. Species data supplied by Andrew Ford, Stephen Williams and Karen Richardson.
+}
 
 \source{
-Plant species records from Andrew Ford and Karen Richardson. Training data is from herbariums. These data have been cleaned and corrected by Andrew Ford for modeling by the Rainforest CRC, Townsville.  Most records are thought to be accurate to within 3 km, and were collected within the last 40 years. Presence-absence from 102 of Andrew Ford's survey sites. These have very accurate coordinate data and were collected in the last 20 years. Vertebrate data was collected by Steve Williams. Training data is from incidental surveys using GPS. Presence-absence data from field surveys. 
+See reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
+}
+
+\references{
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
 }
 
 \keyword{datasets}

@@ -4,7 +4,7 @@
 
  
 \title{
-predictor variables
+Predictor variables
 }
 
 \description{

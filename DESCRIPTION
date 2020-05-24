@@ -1,10 +1,17 @@
 Package: disdat
 Type: Package
-Title: Data for evaluating species distribution modelling methods
+Title: Data for Comparing Species Distribution Modeling Methods
 Version: 0.1
-Date: 27-March-2010
-Author: Jane Elith, Catherine Graham, Robert Hijmans, Steven Phillips
-Maintainer: Robert Hijmans <r.hijmans@gmail.com>
-Description: Data sets for testing species distribution models
+Date: 2019-12-02
+Author: Robert J. Hijmans, Roozbeh Valavi, and Jane Elith
+Maintainer: Roozbeh Valavi <valavi.r@gmail.com>
+Description: Data sets for testing species distribution models.
 License: GPL (>=3)
+Encoding: UTF-8
 LazyLoad: yes
+Depends: R (>= 3.5.0)
+Imports: sf (>= 0.8-0), tmap, grid
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2019-12-12 02:44:20 UTC; rvalavi

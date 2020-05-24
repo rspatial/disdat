@@ -1,48 +1,63 @@
 \name{CAN}
 
-\alias{CANtrain}
-\alias{CANbackground}
-\alias{CANtest}
+\alias{CAN}
+%\alias{CANtrain}
+%\alias{CANbackground}
+%\alias{CANtest}
 
 \docType{data}
 
-\title{South American plant species distribution data}
+\title{Canadian bird species distribution data}
 
 \description{
-Species occurence data for 20 bird species from Ontario, a province in Canada (CAN) and associated environmental data. There are three data sets with training (CANtrain), background (CANbackground), and test (CANtest) data. The training data principally consist of environmental variables at locations where the species where observed (presence only), and at random locations for background data. The test data are presence/absence observations on the CANme species, independent from the training data.
+Species occurrence data for 20 bird species from Ontario, a province in Canada (CAN), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (CANtrain_po and CANtrain_bg) and test (CANtest_pa, CANtest_env) data:  
 
+CANtrain_po includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (bird), and site values for 11 environmental variables (below). Records for any one species can be extracted by selecting the relevant rows.  
 
+CANtrain_bg has 10000 sites selected at random across the study region. It is structured identically to CANtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group.   
 
-Environmental variables:
+CANtest_env includes site names, coordinates, and site values for 11 environmental variables (below), at 14571 sites. This file is suited to making predictions.   
+
+CANtest_pa includes site names, coordinates, and presence-absence records, one column per species. The sites are identical, and in the same order, as CANtest_env. This file is suited to evaluating the predictions made to CANtest_env.
+
+Raster (gridded) data for all environmental variables are available - see the reference below for details. 
+
+The reference system of the x and y coordinates is unprojected with Clarke 1866 ellipsoid . Latitude and longitude are in geographical coordinates using unknown datum based upon the Clarke 1866 ellipsoid (EPSG:4008).
+   
+The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
+
+\strong{Environmental variables:}
 \tabular{llll}{  
-Code \tab Description \tab Units \tab Type\cr
-Onttemp  \tab  Annual mean temperature   \tab  degrees C  \tab  Continuous \cr
-Onttemp4  \tab  April temperature  \tab  degrees C  \tab  Continuous \cr
-Ontveg  \tab  Vegetation   \tab  none  \tab  Categorical \cr
-Ontprec  \tab  Annual Precipitation  \tab  mm  \tab  Continuous \cr
-Ontprecsd  \tab  Precipitation Seasonality (Coefficient of Variation)  \tab  mm  \tab  Continuous \cr
-Ontprec4  \tab  Precipitation of Driest Quarter  \tab  mm  \tab  Continuous \cr
-Onttemsd  \tab  Temperature standard deviation   \tab  degrees C  \tab  Continuous \cr
+\strong{Code} \tab \strong{Description} \tab \strong{Units} \tab \strong{Type} \cr
 alt  \tab  Digital elevation   \tab  m  \tab  Continuous \cr
-asp2  \tab  Aspect  \tab  ranges from 0 to 1  \tab  Continuous \cr
+asp2  \tab  Aspect  \tab  ranges from -1 to 1 (sin transformation)  \tab  Continuous \cr
+ontprec  \tab  Annual Precipitation  \tab  mm  \tab  Continuous \cr
+ontprec4  \tab  April precipitation  \tab  mm  \tab  Continuous \cr
+ontprecsd  \tab  Precipitation Seasonality  \tab  dimensionless  \tab  Continuous \cr
 ontslp  \tab  Slope   \tab  degrees  \tab  Continuous \cr
+onttemp  \tab  Annual mean temperature   \tab  degrees C * 10  \tab  Continuous \cr
+onttempsd  \tab  Temperature standard deviation   \tab  dimensionless  \tab  Continuous \cr
+onttmin4  \tab  April minimum temperature  \tab  degrees C * 10 \tab  Continuous \cr
+
+ontveg  \tab  Vegetation, from Ontario Land Cover Database (OLC) vegetation map, derived from a mosaic of Landsat images.   \tab  5 classes: 1 = open forest & related; 2 = closed forest; 3 = open water, 4 = agriculture, 5 = human settlement  \tab  Categorical \cr
 watdist  \tab  Distance from Hudson Bay  \tab  m  \tab  Continuous \cr
 }
 }
 
 \usage{
-data(CANtrain)
-data(CANbackground)
-data(CANtest)
+disData('CAN')
 }
 
-\author{M. Peck, M. Cadman, Falk Huettmann}
+\author{
+Environmental predictors prepared by Falk Huettmann, Jane Elith and Catherine Graham. Species data: PO from the Ontario Nest Records database, Royal Ontario Museum (ROM) and supplied by M. Peck to Falk Huettmann;  PA from Breeding Bird Atlas for Ontario, provided by M. Cadman to Falk Huettmann.
+}
 
 \source{
-Training data are 'Ontario Nest Records' from the Royal Ontario Museum (ROM) obtain from M. Peck for NCEAS project. Temporal Span 1870-2002 (most from 1960-2001). Methods of Georeferencing: Coordinates derived from map by ROM; some locations ground-truthed with GPS. Taxonomic Authorities: individual nest recorders.
+See reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
+}
 
-Test data: the Breeding Bird Atlas (BBA) Data for Ontario, provided by M. Cadman.
-
+\references{
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in prep) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
 }
 
 \keyword{datasets}
