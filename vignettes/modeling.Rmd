@@ -1,0 +1,244 @@
+---
+title: "Modeling NCEAS data"
+author: "Roozbeh Valavi and Jane Elith"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Modeling NCEAS data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy = TRUE, tidy.opts=list(width.cutoff=80))
+```
+## Introduction
+The `disdat` package is primarily a data package, supplying the data described in Elith et al.(in review). There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models. These data were compiled by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA (project ID: 4980). That group, or subsets of its members, have published 13 papers using some or all of the data for various explorations of model performance. Those papers are detailed in Elith et al. (in review). 
+
+The data are now released both on Open Science Framework primarily as .csv files (**link to be added once made public) and here as an R package. Both sets of data are similar; in addition the OSF dataset includes raster files not supplied here (561MB zipped) and additional metadata files. Elith et al. (in review) detail the background to the data including suppliers, sources of both species and environmental data, steps for cleaning and preparation for modeling. Some of that information is also provided in the help files in this package, but note that Elith et al. (in review) provide the full documentation needed to understand the data.
+
+Several functions are supplied, with help pages, in the `disdat` package, to load the data into your workspace or get it for modelling:`disData`, `getDisData` and `getBorder`. The help files explain the nuances of these, and give examples of their application to load all data from all regions, or subsets of it. A function `predictors` returns the names of all predictor variables in the dataset.  
+
+Finally, the function `spMapBook` enables you to generate maps, in PDF format, showing the location of PO and PA data for all species within one or more regions, with the "classic" theme looking like this:
+
+```{r, out.width = 400, echo=F, fig.align="center"}
+knitr::include_graphics("../man/figures/mapbook_eg.png")
+``` 
+
+In the remainder of this vignette we provide a few examples of how to model and evaluate using these data, and how to make your own target group background sample to help you to deal with biases in the data.
+
+## Modeling all species with one modeling method - example
+In this section, code is provided as an example of one approach for using these data for modeling and evaluation. Here we model all 226 species, using a random forest (RF) model with default settings. 
+
+As you read the code you will notice two things:
+1. for any one region and biological group, the evaluation data comes in two files: environmental data, that can be predicted to, and species data, for evaluating the predictions. 
+2. that two regions (AWT and NSW) have more than one set of evaluation files, because there is more than one biological group (and therefore more than one set of surveys) for those regions. 
+Both these points are explained in the help files for the data, and in Elith et al. (in review).
+
+The way we organise the species data for modeling suits the randomForest package - each modeling method has different requirements. 
+
+```{r eval=FALSE}
+# loading the library
+library(disdat) 
+library(forcats) # for handling factor variables
+library(randomForest)
+```
+
+
+Prepare for modeling:
+```{r eval=FALSE}
+# set output directory for prediction csv files:
+outdir <- "~/Desktop/modeling_nceas"
+# provide names for regions to be modeled - here we model all 6:
+regions <- c("AWT", "CAN", "NSW", "NZ", "SA", "SWI")
+# specify names of all categorical variables across all regions:
+categoricalvars <- c("ontveg", "vegsys", "toxicats", "age", "calc")
+
+# check the model's output directory
+if(file.exists(outdir)){
+  print("The directory already exists!")
+} else{
+  dir.create(file.path(outdir))
+  print("The directory is created.")
+}
+```
+
+Now start the modeling, working through one region at a time, getting the data for modeling and prediction, ensuring categorical predictors are represented correctly, and fitting a random forest model:
+```{r eval=FALSE}
+n <- 0
+for(r in regions){
+  # reading presence-only and background species data for this region, one file per region:
+  presences <- getDisData(r, "train", "po")
+  background <- getDisData(r, "train", "bg")
+  
+  # extract names for all species
+  species <- unique(presences$spid)
+  
+  # now for each species, prepare data for modeling and evaluation 
+  # with randomForests, model, predict to the evaluation file with 
+  # environmental data. 
+  for(s in species){
+    # subset presence records of species for this species
+    sp_presence <- presences[presences$spid == s, ]
+    # add background data
+    pr_bg <- rbind(sp_presence, background)
+    
+    # find the evaluation file – for some regions this means identifying the taxonomic group
+    if(r %in% c("AWT", "NSW")){
+      sp_grp <- sp_presence$group[1]
+      evaluation <- getDisData(r, "test", "env", sp_grp)
+    } else{
+      evaluation <- getDisData(r, "test", "env")
+    }
+
+    # convert categorical vars to factor in both training and testing data. We use the package forcats to ensure that the levels of the factor in the evaluation data match those in the training data, regardless of whether all levels are present in the evaluation data. 
+    for(i in 1:ncol(pr_bg)){
+      if(colnames(pr_bg)[i] %in% categoricalvars){
+        fac_col <- colnames(pr_bg)[i]
+        pr_bg[ ,fac_col] <- as.factor(pr_bg[ ,fac_col])
+        evaluation[ ,fac_col] <- as.factor(evaluation[ ,fac_col])
+        evaluation[ ,fac_col] <- forcats::fct_expand(evaluation[,fac_col], levels(pr_bg[,fac_col]))
+        evaluation[ ,fac_col] <- forcats::fct_relevel(evaluation[,fac_col], levels(pr_bg[,fac_col]))
+      }
+    }
+    
+    # extract the relevant columns for modelling
+    model_data <- pr_bg[, c("occ", predictors(r))]
+    # convert the response to factor for RF model to return probabilities
+    model_data$occ <- as.factor(model_data$occ)
+    
+    # start modeling! We use the "try" notation so if a species fails to fit, the loop will continue.
+    n <- n + 1
+    ptm <- proc.time()
+    if(inherits(try(
+      mod <- randomForest(occ ~ ., data = model_data, ntree = 500)
+    ), "try-error")){print(paste("Error for species", s, "from", r))}
+    t <- proc.time() - ptm
+    
+    # make and save the prediction
+    out_file <- evaluation[,1:3]
+    out_file$spid <- sp_presence$spid[1]
+    out_file$group <- sp_presence$group[1]
+    out_file$prediction <- predict(mod, evaluation, type = "prob")[,"1"]
+    write.csv(out_file, paste(outdir, "/", r, "_", s, "_rf", ".csv", sep=""), row.names = FALSE)
+    print(n)
+  }
+}
+
+
+```
+
+
+## Evaluating the models
+
+Here we give an example of evaluating the predictive performance of the model using area under the ROC curve (AUC). We get the predictions we have made, read in the relevant presence-absence observations, and evaluate the predictions. 
+
+```{r, eval=FALSE}
+library(dplyr)
+library(ROCR)
+
+# specify the output folder that contains species predictions, and in which to save the models results
+modelsdir <- "~/Desktop/modeling_nceas"
+
+# get the names of all the prediction files
+sp_preds <- list.files(modelsdir, pattern = ".csv$", full.names = FALSE)
+
+# a data.frame to save the evaluation result
+rf_eval <- data.frame(region = rep(NA, length(sp_preds)), 
+                      species = NA, 
+                      auc = NA)
+
+# now a loop to evaluate each species, one at a time:
+n <- 0
+for(i in sp_preds){
+  pred <- read.csv(file.path(modelsdir, i), stringsAsFactors = FALSE)
+  # get information on the species (s) and region (r) for each file:
+  r <- unlist(strsplit(i, "_"))[1]
+  s <- unlist(strsplit(i, "_"))[2]
+  
+  # now evaluate predictions, finding the right column for this species
+  # find the evaluation file – for some regions this means identifying the taxonomic group
+  if(r %in% c("AWT", "NSW")){
+    sp_grp <- pred$group[1]
+    evals <- getDisData(r, "test", "pa", sp_grp)
+  } else{
+    evals <- getDisData(r, "test", "pa")
+  }
+  n <- n + 1
+  perf <- prediction(pred$prediction, evals[, s]) %>% 
+    performance("auc")
+  rf_eval$region[n] <- r
+  rf_eval$species[n] <- s
+  rf_eval$auc[n] <- as.numeric(perf@y.values)
+  print(s)
+}
+
+mean(rf_eval$auc)
+hist(rf_eval$auc)
+
+# auc mean for region
+rf_eval %>% 
+  group_by(region) %>% 
+  summarise(mean(auc))
+
+```
+
+
+## Creating target group background (TGB) sample
+
+### Introduction
+
+This gives an example for one region, NSW, for creating target group background (TGB) samples. We chose NSW because it has several groups of species, so is one of the more complex examples. 
+
+The main thing to understand here is that for TGB samples the intention is to create a sample consistent with protocols used for the presence records. So, for example, if you had cleaned presence records so there was only one record for each unique location, you would also screen the TGB samples in the same way. 
+
+For these NCEAS data, the presence-only records were cleaned (per species) to one per grid cell. When making the TGB sample (e.g. for birds) a naïve approach would be to simply gather all the records for birds, and use those as a TGB sample. This would not be correct. You may have multiple records in any one cell (e.g. because a recorder may have gone to that location and recorded several species). The idea is to represent survey effort, and the survey effort is not a lot greater for recording many species at one location (or in this case, in one cell). Hence we will reduce the set of records for any designated "group" to one record per grid cell. 
+
+To do this, you will need to download the rasters here on OSF:
+https://osf.io/kwc4v/?view_only=b0a21181254e4305aa356a761c03758b 
+- see the /data/Environment folder. 
+You can download all rasters at once by highlighting the "Environment" folder and clicking "Download as zip".
+
+### TGB example
+
+The code below assumes you have set your working directory, and the environmental rasters are in a sub-folder "env_grids", with the rasters for each region within their respective regional folders
+
+Load the required packages:
+```{r warning=F, message=F}
+library(raster)
+```
+
+Read in the data for NSW:
+```{r eval=F}
+po <- getDisData('NSW', 'train', 'po')
+nsw.raster <- raster("env_grids/nsw/mi.tif")
+```
+
+Check how many groups and records in these PO data, and think about what target groups to propose. Here there are 8 groups (see main paper), but it is sensible to collapse some of these, given the way that recorders are likely to survey. Following Phillips et al. (2009) we propose four target groups: bat, bird, plant, reptile:
+
+```{r message=F, eval=F, collapse=T}
+table(po$group)
+target.groups <- list("bat"= "ba", "bird"= c("db", "nb"), "plant"= c("ot", "ou", "rt", "ru"), "reptile"= "sr") 
+```
+
+Now, for each target group, extract the relevant rows of data, find which cell each record is in, then identify and remove the duplicates:
+```{r warning=F, message=F, eval=F}
+tgb.data <- list()
+
+for(i in 1:4){
+  getgroup <- match(po$group, target.groups[[i]])
+  dat <- po[!is.na(getgroup),]
+  samplecellID <- cellFromXY(nsw.raster,dat[,c("x","y")]) 
+  dup <- duplicated(samplecellID)
+  tgb.data[[i]] <- dat[!dup,]
+}
+
+names(tgb.data) <- names(target.groups)
+```
+
+## References
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in review) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+
+Phillips, S.J., Dudík, M., Elith, J., Graham, C.H., Lehmann, A., Leathwick, J. & Ferrier, S. (2009) Sample selection bias and presence-only distribution models: implications for background and pseudo-absence data. Ecological Applications, 19, 181–197.

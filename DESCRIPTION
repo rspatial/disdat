@@ -1,7 +1,7 @@
 Package: disdat
 Type: Package
 Title: Data for Comparing Species Distribution Modeling Methods
-Version: 0.1
+Version: 0.1-2
 Date: 2019-12-02
 Author: Robert J. Hijmans, Roozbeh Valavi, and Jane Elith
 Maintainer: Roozbeh Valavi <valavi.r@gmail.com>
