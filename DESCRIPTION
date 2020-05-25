@@ -1,10 +1,19 @@
 Package: disdat
 Type: Package
-Title: Data for evaluating species distribution modelling methods
-Version: 0.1
-Date: 27-March-2010
-Author: Jane Elith, Catherine Graham, Robert Hijmans, Steven Phillips
-Maintainer: Robert Hijmans <r.hijmans@gmail.com>
-Description: Data sets for testing species distribution models
+Title: Data for Comparing Species Distribution Modeling Methods
+Version: 0.2-1
+Date: 2019-12-02
+Maintainer: Roozbeh Valavi <valavi.r@gmail.com>
 License: GPL (>=3)
+Encoding: UTF-8
 LazyLoad: yes
+Depends: R (>= 3.5.0)
+Suggests: knitr, rmarkdown, sf, terra, raster, rgdal, tmap, grid
+VignetteBuilder: knitr
+NeedsCompilation: no
+Authors@R: c(
+	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
+			email = "r.hijmans@gmail.com", comment = c(ORCID = "0000-0001-5872-2872")),
+    person("Roozbeh", "Valavi", role = "aut"),
+    person("Jane", "Elith",  role = "aut"))
+Description: Easy access to species distribution data for 6 regions in the world, for a total of 226 anonymised species. These data were first used by Elith et al (2006) <10.1111/j.2006.0906-7590.04596.x> to compare species distribution modelling methods; and have been used in several other studies as well. 

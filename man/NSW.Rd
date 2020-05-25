@@ -1,8 +1,6 @@
 \name{NSW}
 
-\alias{NSWtrain}
-\alias{NSWbackground}
-\alias{NSWtest}
+\alias{NSW}
 
 
 \docType{data}
@@ -10,46 +8,67 @@
 \title{New South Wales species distribution data}
 
 \description{
-Species occurence data for 54 species from 8 biological groups in New South Wales (NSW, a state in Australia) and associated environmental data. There are three data sets with training (NSWtrain), background (NSWbackground), and test (NSWtest) data. The training data principally consist of environmental variables at locations where the species where observed (presence only), and at random locations for background data. The test data are presence/absence observations on hte same species, independent from the training data.
+Species occurrence data for 54 species from 8 biological groups in New South Wales (NSW, a state in Australia) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below). 
 
-spid is a four letter code. The first two letters indicate group: ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species) \cr
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to NSWtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
 
+\code{env} includes site names, coordinates, and site values for 13 environmental variables (below). Since these survey data come from different surveys for each biological group (from 570 to 2075 sites per group), there are eight separate datasets. This set of files is suited to making predictions. 
 
-Environmental variables:
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{distPa}. The sites are identical to the sites in \code{env}, and again there are separate files for each group. This set of files is suited to evaluating the predictions made to \code{env}.
+
+Raster (gridded) data for all environmental variables are available - see the reference below for details. 
+
+The reference system of the x and y coordinates is unprojected. Latitude and longitude are in geographical coordinates using the WGS84 datum (EPSG:4326).
+
+The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
+
+\strong{Environmental variables:}
 \tabular{llll}{  
-Code      \tab Description                          \tab Units     \tab Type \cr
-rainann   \tab mean annual rainfall                 \tab mm        \tab Continous \cr
-raindq    \tab mean rainfall of the driest quarter  \tab mm        \tab Continous  \cr
-tempann   \tab annual mean temperature              \tab deg C     \tab Continous   \cr
-tempmin   \tab minimum temperature of the coldest month \tab deg C \tab Continous \cr
-solrad    \tab annual mean solar radiation (terrain adjusted)      \tab MJm-2day-1 \tab Continous \cr
-mi        \tab moisture index. Index of site wetness derived from a water balance algorithm \tab Between 0 (dry) and 1 (wet) \tab Continous \cr
-soilfert  \tab soil fertility class, derived from soil maps and modeling of geochemical data \tab  1 (low) to 5 (high) \tab Continous \cr
-soildepth \tab mean soil depth predicted from a model relating sampled soil depths to climate, geology and topography \tab m \tab Continous \cr
-rugged    \tab ruggedness. Coefficient of variation of grid cells within 1km of cell of interest \tab percent \tab Continous \cr
-topo      \tab topographic position. Mean difference in elevation between grid cell of interest and all cells within 1km radius (-ve values are gullies, +ve are ridges) \tab m \tab Continous\cr
-cti      \tab "compound topographic index" a quantification of the position of a site in the local landscape. It is often referred to as the steady state wetness index and it is defined as: CTI = ln ( As / tanB ) where 'As' is the specific catchment area expressed as m2 per unit width orthogonal to the flow direction and 'B' is the slope angle \tab \tab Continous\cr
-disturb  \tab disturbance (clearing, logging etc) index. \tab 1 = light, 2 = moderate, 3 = heavy \tab Continous\cr
+\strong{Code} \tab \strong{Description} \tab \strong{Units} \tab \strong{Type} \cr
+
+cti      \tab "compound topographic index" - a quantification of the position of a site in the local landscape. It is often referred to as the steady state wetness index and it is defined as: CTI = ln ( As / tanB ) where 'As' is the specific catchment area expressed as m2 per unit width orthogonal to the flow direction and 'B' is the slope angle \tab \tab Continuous\cr
+
+disturb  \tab disturbance (clearing, logging etc) index. \tab 1 = light, 2 = moderate, 3 = heavy \tab Continuous\cr
+
+mi        \tab moisture index. Index of site wetness derived from a water balance algorithm using rainfall, evaporation, radiation and soil depth as inputs \tab Between 0 (dry) and 100 (wet) \tab Continuous \cr
+
+rainann \tab mean annual rainfall  \tab mm \tab Continuous \cr
+
+raindq    \tab mean rainfall of the driest quarter  \tab mm        \tab Continuous  \cr
+
+rugged    \tab ruggedness. Coefficient of variation of grid cells within 1km of cell of interest \tab percent \tab Continuous \cr
+
+soildepth \tab mean soil depth predicted from a model relating sampled soil depths to climate, geology and topography \tab m * 1000 \tab Continuous \cr
+
+soilfert  \tab soil fertility ordinal class, derived from soil maps and modeling of geochemical data \tab  1 (low) to 5 (high) \tab Continuous \cr
+
+solrad    \tab annual mean solar radiation (terrain adjusted)      \tab MJm^-2day^-1 * 10 \tab Continuous \cr
+
+tempann   \tab annual mean temperature              \tab degrees C * 10     \tab Continuous   \cr
+
+tempmin   \tab minimum temperature of the coldest month \tab degrees C * 10 \tab Continuous \cr
+
+topo      \tab topographic position. Mean difference in elevation between grid cell of interest and all cells within 1km radius (-ve values are gullies, +ve are ridges) \tab m \tab Continuous\cr
+
 vegsys   \tab broad vegetation type \tab 1 = Rainforest, 2 = Moist open forest, 3 = Dry open forest, 4 = Woodland, 5 = Coastal sclerophyll complex, 6 = Plateau sclerophyll complex, 7 = Disturbed remnant, 8 = Exotic (pine) plantation, 9 = Cleared \tab Categorical \cr
 }
 }
 
-\usage{
-data(NSWtrain)
-data(NSWbackground)
-data(NSWtest)
-}
-
-\author{Simon Ferrier}
 
 \source{
-Data was compiled and provided by Simon Ferrier and colleagues and distributed with his permission. 
+All data were compiled and provided by Simon Ferrier and colleagues.
+}
 
-Training data: Fauna data came from the Atlas of NSW Wildlife (a database of incidental sighting records), and the flora data consisted of specimen records from both the University of New England Herbarium and the Sydney Herbarium (Royal Botanic Gardens). All available records used. No information on collection dates or accuracy. Reduced to one record per species per 100m grid cell. These data were used by Ferrier, S. and G. Watson,  1997. An evaluation of the effectiveness of environmental surrogates and modeling techniques in predicting the distribution of biological diversity. Environment Australia, Canberra (\url{http://www.ea.gov.au/biodiversity/publications/technical/surrogates/}). That report provides further detail on the origin and nature of the data.
+\references{
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+}
 
-Testing data is from designed surveys. These are described in Ferrier and Watson (1996; see above), and Pearce J., Ferrier S. & Scotts D. (2001) An evaluation of the predictive performance of distributional models for flora and fauna in north-east New South Wales., J. Environ. Manage., 62, 171-184.
 
+\examples{
+x <- disData('NSW')
+sapply(x, head)
 }
 
 \keyword{datasets}

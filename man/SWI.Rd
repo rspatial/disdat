@@ -1,49 +1,76 @@
 \name{SWI}
 
-\alias{SWItrain}
-\alias{SWIbackground}
-\alias{SWItest}
+\alias{SWI}
 
 \docType{data}
 
-\title{Switzerland species distribution data}
+\title{Swiss species distribution data}
 
 \description{
-Species occurence data for 30 tree species in Switzerland (SWI, a country in Europe) and associated environmental data. There are three data sets with training (SWItrain), background (SWIbackground), and test (SWItest). The training data principally consist of environmental variables at locations where the species where observed (presence only), and at random locations for background data. The test data are presence/absence observations of the same species, independent from the training data.
+Species occurrence data for 30 tree species in Switzerland (SWI, a country in Europe) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (tree), and site values for 13 environmental variables (below). 
 
-Environmental variables:
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
+
+\code{env} includes site names, coordinates, and site values for 13 environmental variables (below), at 10103 sites. This file is suited to making predictions. 
+
+\code{pa} includes site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
+
+Raster (gridded) data for all environmental variables are available - see the reference below for details. 
+
+The reference system of the x and y coordinates is Transverse, spheroid Bessel  (EPSG:21781) (note all SWI data has a constant shift applied).
+
+The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
+
+\strong{Environmental variables:}
 \tabular{llll}{  
+\strong{Code} \tab \strong{Description} \tab \strong{Units} \tab \strong{Type} \cr
+ 
+ bcc  \tab  Broadleaved continuous cover  (based on Landsat images)  \tab  percentage  \tab  Continuous \cr
+calc  \tab  Bedrock is strictly calcareous  \tab 1 (yes) or 0 (no)  \tab  Categorical  \cr
+ccc  \tab  Coniferous continuous cover  (based on Landsat images) \tab  percentage   \tab  Continuous  \cr 
+
 ddeg  \tab  Growing degree-days above a threshold of 0 degrees C  \tab  degrees C * days  \tab  Continuous   \cr
-tavecc  \tab  Average temperature of the Coldest Month   \tab  degrees C  \tab  Continuous   \cr
-sfro  \tab  Summer Frost Frequency \tab  days  \tab  Continuous   \cr
-precyy  \tab  Average Yearly Precipitation Sum   \tab  mm  \tab  Continuous   \cr
+
+nutri  \tab  Soil nutrients index between 0-45  \tab  D mval/cm2  \tab  Continuous   \cr
+
 pdsum  \tab  Number of days with rainfall higher than 1 mm   \tab  ndays  \tab  Continuous   \cr
-swb  \tab  Site Water Balance  \tab  mm  \tab  Continuous   \cr
-sradyy  \tab  Potential Yearly Global Radiation (daily average)   \tab  (kJ/m2)/day  \tab  Continuous   \cr
+
+precyy  \tab  Average yearly precipitation sum   \tab  mm  \tab  Continuous   \cr
+
+sfro  \tab  Summer Frost Frequency \tab  days  \tab  Continuous   \cr
+
 slope \tab  Slope  \tab  degrees x 10  \tab  Continuous   \cr
-topo  \tab  Topographic Position  \tab  range   \tab  Continuous   \cr
-nutri  \tab  Soil Nutrients index between 0-45  \tab  D mval/cm2  \tab  Continuous   \cr
-calc  \tab  Bedrock strictly calcareous vs. other type   \tab  p/a  \tab  Categorical  \cr
-bcc  \tab  Broadleaved Continuous Cover  (based on Landsat images)  \tab  percentage  \tab  Continuous \cr
-ccc  \tab  Coniferous Continuous Cover  (based on Landsat images) \tab  percentage   \tab  Continuous  \cr 
+
+sradyy  \tab  Potential yearly global radiation (daily average)   \tab  (kJ/m2)/day  \tab  Continuous   \cr
+
+swb  \tab  Site water balance  \tab  mm  \tab  Continuous   \cr
+
+tavecc  \tab  Average temperature of the coldest month   \tab  degrees C  \tab  Continuous   \cr
+
+topo  \tab  Topographic position  \tab  dimensionless   \tab  Continuous   \cr
+}
 }
 
-}
-
-\usage{
-data(SWItrain)
-data(SWIbackground)
-data(SWItest)
-}
-
-\author{Antoine Guisan and Nicklaus Zimmerman}
 
 \source{
-Training data set is a forest inventory data set. A regular point lattice across Switzerland located on a 1km national grid. The lattice points that do contain forest according to the national definition within the Swiss forest inventory are sampled in the field. The data originate from the 1985 national inventory, actually collected from 1982-1986.
+Environmental predictors supplied by Niklaus E. Zimmermann. Species data supplied by Niklaus E. Zimmermann, Thomas Wohlgemuth and Meinrad Abegg.
 
-Test data set is from forest plots. A forest vegetation data base containing irregularly and nonsystematically sampled forest vegetation relevees throughout Switzerland. Dates: records start in 1913. The majority of the plots was collected after 1920, and about 3/4th of the data were sampled after 1940. The data base ends in 1998, but most records are from 1994 and earlier. The individual authors had their own local sampling design or used preferential sampling techniques. From the original data base, selected roughly 14,100 relevees that included minimal data standards such as coordinates. 
+See the reference below for further details on source, accuracy, cleaning, and particular characteristics of these datasets.
 }
+
+\references{
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+}
+
+
+\examples{
+library(disdat)
+x <- disData("SWI")
+sapply(x, head)
+}
+
 
 \keyword{datasets}
 

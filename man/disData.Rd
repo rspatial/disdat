@@ -1,47 +1,85 @@
 \name{disData}
 
-\alias{disData}
 \alias{getDisData}
+\alias{disData}
+\alias{disPo}
+\alias{disBg}
+\alias{disPa}
+\alias{disEnv}
 
+\alias{disBorder}
 
 \title{
-Load or get disdat datasets
+Get disdat datasets
 }
 
 \description{
-Simple helper functions. disData loads all three datasets for one or more regions into the global environment. getDisData returns a single dataset (region / type). 
+\code{disPo} returns the presence-only (po) data for a region region
+
+\code{disBg} returns the background (bg) data for a region region
+
+\code{disPa} returns the presence-absence (pa) data for a region region and group
+
+\code{disEnv} returns the environmental (env) data for a region region and group
+
+\code{disData} returns a list will all data for a region.
+
+\code{getDisData} returns a single dataset for a region region, type and group.
+
+\code{disBorder} returns a polygon for one of the regions.
 }
 
+
 \usage{
-disData(...)
-getDisData(region, type)
+disData(region)
+
+disPo(region)
+
+disBg(region)
+
+disPa(region, group)
+
+disEnv(region, group)
+
+getDisData(region, dataset, type, group)
+
+disBorder(region, pkg="sf")
 }
  
 \arguments{
-  \item{...}{Character. 'ALL', or one or more of 'AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI' }
-  \item{region}{Character. One of 'AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI' }
-  \item{type}{Character. One of 'train', 'background', 'test' }
+  \item{region}{character. One of "AWT", "CAN", "NSW", "NZ", "SA", "SWI" }
+ 
+  \item{dataset}{character. One of "train", or "test" }
+
+  \item{type}{character. One of "po" or "bg" (if \code{dataset} is \code{"train"}); "pa" or "env" (if \code{dataset} is \code{"test"})}
+  
+  \item{group}{character. If \code{region} is \code{"NSW"}, one of "ba", "db", "nb", "ot", "ou", "rt", "ru", "sr". \code{region} is \code{"AWT"} "bird", "plant". The other regions have no groups.}
+ 
+  \item{pkg}{character. Eihter "sf", "sp", or "terra" to get polygons as defined by that package}
 }
 
 
 \value{
-disData does not return anything, it is used for the side effect of loading data into the global environment. 
-getDisData returns a data.frame
+data.frame (getDisData) or list with four data.frames (disData)
 }
 
-
-\author{
-Robert J. Hijmans
-}
 
 \examples{
-disData('NSW')
-NSWtest[1, 1:10]
-d <- getDisData('NSW', 'test')
-d[1,1:10]
+awt_po <- disPo("AWT")
 
-# standard approach
-data(NSWtest)
+awt_bg <- disBg("AWT")
+
+awt_pa_plants <- disPa("AWT", "plants")
+
+awt_env_plants <- disEnv("AWT", "plants")
+
+
+x <- disData("NSW")
+
+names(x)
+
+sapply(x, head)
+
 }
 
 \keyword{data}
