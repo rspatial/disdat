@@ -7,24 +7,24 @@
 \title{Canadian bird species distribution data}
 
 \description{
-Species occurrence data for 20 bird species from Ontario, a province in Canada (CAN), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:  
+Species occurrence data for 20 bird species from Ontario, a province in Canada (CAN), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (bird), and site values for 11 environmental variables (below).   
+\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (bird), and site values for 11 environmental variables (below).
 
-\code{bg} has 10000 sites selected at random across the study region. It is structured identically to CANtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group.   
+\code{bg} has 10000 sites selected at random across the study region. It is structured identically to CANtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group.
 
-\code{env} includes site names, coordinates, and site values for 11 environmental variables (below), at 14571 sites. This file is suited to making predictions.   
+\code{env} includes group, site names, coordinates, and site values for 11 environmental variables (below), at 14571 sites. This file is suited to making predictions.
 
-\code{pa} includes site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
+\code{pa} includes group, site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
 
-Raster (gridded) data for all environmental variables are available - see the reference below for details. 
+Raster (gridded) data for all environmental variables are available - see the reference below for details.
 
 The reference system of the x and y coordinates is unprojected with Clarke 1866 ellipsoid . Latitude and longitude are in geographical coordinates using unknown datum based upon the Clarke 1866 ellipsoid (EPSG:4008).
-   
-The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
+
+The vignette provided with this package provides an example of how to fit and evaluate a model with these data.
 
 \strong{Environmental variables:}
-\tabular{llll}{  
+\tabular{llll}{
 \strong{Code} \tab \strong{Description} \tab \strong{Units} \tab \strong{Type} \cr
 alt  \tab  Digital elevation   \tab  m  \tab  Continuous \cr
 asp2  \tab  Aspect  \tab  ranges from -1 to 1 (sin transformation)  \tab  Continuous \cr
@@ -54,8 +54,19 @@ Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A.,
 
 
 \examples{
-x <- disData('CAN')
+can_po <- disPo("CAN")
+can_bg <- disBg("CAN")
+
+can_pa <- disPa("CAN")
+can_env <- disEnv("CAN")
+
+
+# Or all in one list
+x <- disData("CAN")
 sapply(x, head)
+
+disCRS("CAN")
+
 }
 
 \keyword{datasets}
