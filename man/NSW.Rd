@@ -10,13 +10,13 @@
 \description{
 Species occurrence data for 54 species from 8 biological groups in New South Wales (NSW, a state in Australia) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below).
+\code{po} (training data) includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below).
 
-\code{bg} has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting a background record in a way suited to most modelling methods) and \code{NA} for group.
+\code{bg} (training data) has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting a background record in a way suited to most modelling methods) and \code{NA} for group.
 
-\code{env} includes group, site names, coordinates, and site values for 13 environmental variables (below). These survey data come from different surveys for each biological group (from 570 to 2075 sites per group), and can be returned as separate datasets by \code{disEnv}, or in one long format dataset by \code{disData}. This set of files is suited to making predictions.
+\code{env} (testing data) includes group, site names, coordinates, and site values for 13 environmental variables (below). These are for sites from different surveys for each biological group (from 570 to 2075 sites per group), and can be returned as separate datasets by \code{disEnv}, or in one long format dataset by \code{disData}. This set of files is suited to making predictions.
 
-\code{pa} includes group, site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{disPa}). They can also be returned in long format using \code{disData}. The sites are identical to the sites in \code{env}. These data are suited to evaluating the predictions made with \code{env}.
+\code{pa} (testing data) includes group, site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{disPa}). They can also be returned in long format using \code{disData}. The sites are identical to the sites in \code{env}. These data are suited to evaluating the predictions made with \code{env}.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details.
 

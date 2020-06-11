@@ -9,13 +9,13 @@
 \description{
 Species occurrence data for 40 species (20 vascular plants, 20 birds) in the Australian Wet Tropics (AWT) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant or bird), and site values for 13 environmental variables (below).
+\code{po} (training data) includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant or bird), and site values for 13 environmental variables (below).
 
-\code{bg} has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting a background record in a way suited to most modelling methods) and \code{NA} for group.
+\code{bg} (training data) has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting a background record in a way suited to most modelling methods) and \code{NA} for group.
 
-\code{env} includes group, site names, coordinates, and site values for 13 environmental variables (below). These survey data come from different surveys for plants (102 sites) and birds (340 sites), and can be returned as separate datasets by \code{disEnv}, or in one long format dataset by \code{disData}. These data are suited to make predictions to.
+\code{env} (testing data) includes group, site names, coordinates, and site values for 13 environmental variables (below). These are for sites from different surveys for plants (102 sites) and birds (340 sites), and can be returned as separate datasets by \code{disEnv}, or in one long format dataset by \code{disData}. These data are suited to make predictions to.
 
-\code{pa} includes group, site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{disPa}). They can also be returned in long format using \code{disData}. The sites are identical to the sites in \code{env}. These data are suited to evaluating the predictions made with \code{env}.
+\code{pa} (testing data) includes group, site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{disPa}). They can also be returned in long format using \code{disData}. The sites are identical to the sites in \code{env}. These data are suited to evaluating the predictions made with \code{env}.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details.
 

@@ -1,19 +1,19 @@
 \name{disCRS}
 
 \alias{disCRS}
-
+ 
 \title{
 Coordinate reference system
 }
 
 \description{
-Get the coordinate reference system for the data of a region.
+Get the coordinate reference system for the data of a region.  
 }
 
 \usage{
 disCRS(region, format="proj4")
 }
-
+ 
 \arguments{
   \item{region}{character. One of "AWT", "CAN", "NSW", "NZ", "SA", "SWI" }
 

@@ -9,13 +9,13 @@
 \description{
 Species occurrence data for 30 vascular plant species (all from the Bignoniaceae family) from Continental Brazil, Ecuador, Colombia, Bolivia, and Peru, South America (SA), and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant), and site values for 11 environmental variables (below).
+\code{po} (training data) includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group (plant), and site values for 11 environmental variables (below).
 
-\code{bg} has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and \code{NA} for group.
+\code{bg} (training data) has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and \code{NA} for group.
 
-\code{env} includes group, site names, coordinates, and site values for 11 environmental variables (below), at 152 sites. This file is suited to making predictions.
+\code{env} (testing data) includes group, site names, coordinates, and site values for 11 environmental variables (below), at 152 sites. This file is suited to making predictions.
 
-\code{pa} includes group, site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
+\code{pa} (testing data) includes group, site names, coordinates, and presence-absence records, one column per species. The sites are identical to the sites in \code{env}. This file is suited to evaluating the predictions made to \code{env}.
 
 Raster (gridded) data for all environmental variables are available - see the reference below for details.
 

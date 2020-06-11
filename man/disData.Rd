@@ -1,6 +1,5 @@
 \name{disData}
 
-\alias{getDisData}
 \alias{disData}
 \alias{disPo}
 \alias{disBg}
@@ -20,7 +19,7 @@ Get disdat datasets
 
 \code{disPa} returns the presence-absence (pa) data for a region and group
 
-\code{disEnv} returns the environmental (env) data for a region and group
+\code{disEnv} returns the environmental (env) data for sites matching those in the pa data, for a region and group
 
 \code{disData} returns a list with all data for a region.
 
@@ -44,6 +43,10 @@ disBorder(region, pkg="sf")
 
 \arguments{
   \item{region}{character. One of "AWT", "CAN", "NSW", "NZ", "SA", "SWI" }
+
+  \item{dataset}{character. One of "train", or "test" }
+
+  \item{type}{character. One of "po" or "bg" (if \code{dataset} is \code{"train"}); "pa" or "env" (if \code{dataset} is \code{"test"})}
 
   \item{group}{character. If \code{region} is \code{"NSW"}, one of "ba", "db", "nb", "ot", "ou", "rt", "ru", "sr". \code{region} is \code{"AWT"} "bird", "plant". The other regions each have only one group, so group should not be specified}
 
