@@ -17,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE, tidy = TRUE, tidy.opts=list(width.cutoff=80))
 
 ## Introduction
 
-The `disdat` package is primarily a data package, supplying the data described in Elith et al.(in review). There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models. These data were compiled by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA (project ID: 4980). That group, or subsets of its members, have published 13 papers using some or all of the data for various explorations of model performance. Those papers are detailed in Elith et al. (in review). 
+The `disdat` package is primarily a data package, supplying the data described in Elith *et al.* (in press). There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models. These data were compiled by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA (project ID: 4980). That group, or subsets of its members, have published 13 papers using some or all of the data for various explorations of model performance. Those papers are detailed in Elith *et al.* (in press). 
 
-The data are now released both on Open Science Framework primarily as .csv files (**link to be added once made public) and here as an R package. Both sets of data are similar; in addition the OSF dataset includes raster files not supplied here (561MB zipped) and additional metadata files. Elith et al. (in review) detail the background to the data including suppliers, sources of both species and environmental data, steps for cleaning and preparation for modeling. Some of that information is also provided in the help files in this package, but note that Elith et al. (in review) provide the full documentation needed to understand the data.
+The data are now released both on Open Science Framework primarily as .csv files (link supplied in first reference, below) and here as an R package. Both sets of data are similar; in addition the OSF dataset includes raster files not supplied here (561MB zipped) and additional metadata files. Elith *et al.* (in press) detail the background to the data including suppliers, sources of both species and environmental data, steps for cleaning and preparation for modeling. Some of that information is also provided in the help files in this package, but note that Elith *et al.* (in press) provide the full documentation needed to understand the data.
 
 Several functions are supplied, with help pages, in the `disdat` package, to load the data into your workspace or get it for modelling: `disPo`, `disBg`, `disPa`, `disEnv` and `getBorder`. The help files explain the nuances of these, and give examples of their application to load all data from all regions, or subsets of it. A function `disPredictors` returns the names of all predictor variables in the dataset and `disCRS` returns the information about coordinate reference system of each region.  
 
@@ -38,7 +38,7 @@ In this section, code is provided as an example of one approach for using these 
 As you read the code you will notice two things:
 1. for any one region and biological group, the evaluation data comes in two files: environmental data, that can be predicted to, and species data, for evaluating the predictions. 
 2. that two regions (AWT and NSW) have more than one set of evaluation files, because there is more than one biological group (and therefore more than one set of surveys) for those regions. 
-Both these points are explained in the help files for the data, and in Elith et al. (in review).
+Both these points are explained in the help files for the data, and in Elith *et al.* (in press).
 
 The way we organise the species data for modeling suits the `randomForest` package - each modeling method has different requirements. 
 
@@ -68,7 +68,7 @@ if(file.exists(outdir)){
 }
 ```
 
-Now start the modeling, working through one region at a time, getting the data for modeling and prediction, ensuring categorical predictors are represented correctly, and fitting a random forest model:
+Now start the modeling, working through one region at a time, getting the data for modeling and prediction, ensuring categorical predictors are represented correctly, and fitting a random forest model. **Note**: this is modelling all 226 species and will take some minutes to complete.
 
 ```{r eval=FALSE}
 n <- 0
@@ -199,10 +199,7 @@ The main thing to understand here is that for TGB samples the intention is to cr
 
 For these NCEAS data, the presence-only records were cleaned (per species) to one per grid cell. When making the TGB sample (e.g. for birds) a naïve approach would be to simply gather all the records for birds, and use those as a TGB sample. This would not be correct. You may have multiple records in any one cell (e.g. because a recorder may have gone to that location and recorded several species). The idea is to represent survey effort, and the survey effort is not a lot greater for recording many species at one location (or in this case, in one cell). Hence we will reduce the set of records for any designated "group" to one record per grid cell. 
 
-To do this, you will need to download the rasters here on OSF:
-https://osf.io/kwc4v/?view_only=b0a21181254e4305aa356a761c03758b 
-- see the /data/Environment folder. 
-You can download all rasters at once by highlighting the "Environment" folder and clicking "Download as zip".
+To do this, you will need to download the rasters from OSF – see the link in the first reference below - see the /data/Environment folder. You can download all rasters at once by highlighting the "Environment" folder and clicking "Download as zip".
 
 ### TGB example
 
@@ -219,7 +216,7 @@ po <- disPo("NSW")
 nsw.raster <- raster("env_grids/nsw/mi.tif")
 ```
 
-Check how many groups and records in these PO data, and think about what target groups to propose. Here there are 8 groups (see main paper), but it is sensible to collapse some of these, given the way that recorders are likely to survey. Following Phillips et al. (2009) we propose four target groups: bat, bird, plant, reptile:
+Check how many groups and records in these PO data, and think about what target groups to propose. Here there are 8 groups (see main paper), but it is sensible to collapse some of these, given the way that recorders are likely to survey. Following Phillips *et al.* (2009) we propose four target groups: bat, bird, plant, reptile:
 
 ```{r message=F, eval=F, collapse=T}
 table(po$group)
@@ -242,6 +239,6 @@ names(tgb.data) <- names(target.groups)
 ```
 
 ## References
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in review) Presence-only and presence-absence data for comparing species distribution modeling methods. Scientific Data.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in press) Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
 
 Phillips, S.J., Dudík, M., Elith, J., Graham, C.H., Lehmann, A., Leathwick, J. & Ferrier, S. (2009) Sample selection bias and presence-only distribution models: implications for background and pseudo-absence data. Ecological Applications, 19, 181–197.
