@@ -58,7 +58,7 @@ disData <- function(region) {
 }
 
 
-getDisData <- function(region, dataset, type, group = NULL) {
+.getDisData <- function(region, dataset, type, group = NULL) {
 
 	region <- .checkRegion(region)
 	dataset <- tolower(dataset[1])
@@ -106,8 +106,8 @@ getDisData <- function(region, dataset, type, group = NULL) {
 
 
 
-disPo <- function(region) { getDisData(region, "train", "po") }
-disBg <- function(region) { getDisData(region, "train", "bg") }
-disPa <- function(region, group = NULL) { getDisData(region, "test", "pa", group) }
-disEnv <- function(region, group = NULL) { getDisData(region, "test", "env", group) }
+disPo <- function(region) { .getDisData(region, "train", "po") }
+disBg <- function(region) { .getDisData(region, "train", "bg") }
+disPa <- function(region, group = NULL) { .getDisData(region, "test", "pa", group) }
+disEnv <- function(region, group = NULL) { .getDisData(region, "test", "env", group) }
 

@@ -44,10 +44,6 @@ disBorder(region, pkg="sf")
 \arguments{
   \item{region}{character. One of "AWT", "CAN", "NSW", "NZ", "SA", "SWI" }
 
-  \item{dataset}{character. One of "train", or "test" }
-
-  \item{type}{character. One of "po" or "bg" (if \code{dataset} is \code{"train"}); "pa" or "env" (if \code{dataset} is \code{"test"})}
-
   \item{group}{character. If \code{region} is \code{"NSW"}, one of "ba", "db", "nb", "ot", "ou", "rt", "ru", "sr". \code{region} is \code{"AWT"} "bird", "plant". The other regions each have only one group, so group should not be specified}
 
   \item{pkg}{character. Either "sf", "sp", or "terra" to get polygons as defined by that package}
