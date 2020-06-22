@@ -1,6 +1,6 @@
 # Author: Robert J. Hijmans and Roozbeh Valavi
 # contact: valavi.r@gmail.com
-# Date : December 2019
+# Date : June 2020
 # Version 0.1
 # Licence GPL v3
 
@@ -23,7 +23,7 @@
 	r$id = NULL
 	rownames(r) <- NULL
 	r
-}	
+}
 
 disData <- function(region) {
 
@@ -34,17 +34,17 @@ disData <- function(region) {
 	nms <- gsub(region, "", nms)
 	nms <- gsub("test_", "", nms)
 	nms <- gsub("train_", "", nms)
-		
+
 	if (length(f) == 4) {
 		x <- lapply(f, readRDS)
 		names(x) <- nms
 		i <- which(nms == "pa")
-		x[[i]] <- .reshape_pa(x[[i]]) 
+		x[[i]] <- .reshape_pa(x[[i]])
 	} else {
 		fe <- grep("_env", f, value=TRUE)
 		env <- lapply(fe, readRDS)
 		env <- do.call(rbind, env)
-		
+
 		fa <- grep("_pa", f, value=TRUE)
 		pa <- lapply(fa, readRDS)
 		pa <- lapply(pa, .reshape_pa)
@@ -52,12 +52,13 @@ disData <- function(region) {
 
 		bg <- readRDS(grep("train_bg", f, value=TRUE))
 		po <- readRDS(grep("train_po", f, value=TRUE))
-		x <- list(env=env, pa=pa, bg=bg, po=po) 			
+		x <- list(env=env, pa=pa, bg=bg, po=po)
 	}
+	return(x)
 }
 
 
-getDisData <- function(region, dataset, type, group = NULL) {
+.getDisData <- function(region, dataset, type, group = NULL) {
 
 	region <- .checkRegion(region)
 	dataset <- tolower(dataset[1])
@@ -81,7 +82,7 @@ getDisData <- function(region, dataset, type, group = NULL) {
 	if(region %in% c("AWT", "NSW") && dataset == "test" && is.null(group)){
 		stop("You should specify a group for test dataset in AWT and NSW regions")
 	}
-	
+
 	if(!is.null(group)){
 		group <- tolower(group[1])
 		groupAWT <- c("bird", "plant")
@@ -93,20 +94,20 @@ getDisData <- function(region, dataset, type, group = NULL) {
 			stop("unknown group for NSW region: ", group, ". Shoud be one of: ", paste(groupNSW, collapse = " "))
 		}
 	}
-	
+
 	if(is.null(group)){
 		x <- file.path(path, paste0(region, dataset, "_", type, ".rds"))
 	} else{
 		x <- file.path(path, paste0("/", region, dataset, "_", type, "_", group, ".rds"))
 	}
-	
+
 	readRDS(x)
 }
 
 
 
-disPo <- function(region) { getDisData(region, "train", "po") }
-disBg <- function(region) { getDisData(region, "train", "bg") }
-disPa <- function(region, group) { getDisData(region, "test", "pa", group) }
-disEnv <- function(region, group) { getDisData(region, "test", "env", group) }
+disPo <- function(region) { .getDisData(region, "train", "po") }
+disBg <- function(region) { .getDisData(region, "train", "bg") }
+disPa <- function(region, group = NULL) { .getDisData(region, "test", "pa", group) }
+disEnv <- function(region, group = NULL) { .getDisData(region, "test", "env", group) }
 

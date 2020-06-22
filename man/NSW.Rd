@@ -10,22 +10,22 @@
 \description{
 Species occurrence data for 54 species from 8 biological groups in New South Wales (NSW, a state in Australia) and associated environmental data. Full details of the dataset are provided in the reference below. There are four data sets with training (po and bg) and test (pa, env) data:
 
-\code{po} includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below). 
+\code{po} (training data) includes site names, species names, coordinates, occurrence ("1" for all, since all are presence records), group [ba = bats (7 species); db = diurnal birds (8 species); nb = nocturnal birds (2 species); ot = open-forest trees (8 species); ou = open-forest understorey plants (8 species); rt = rainforest trees (7 species); ru = rainforest understorey plants (6 species); sr = small reptiles (8 species)], and site values for 13 environmental variables (below).
 
-\code{bg} has 10000 sites selected at random across the study region. It is structured identically to NSWtrain_po, with "0" for occurrence (not implying absence, but denoting background in a way suited to most modelling methods) and "NA" for group. 
+\code{bg} (training data) has 10000 sites selected at random across the study region. It is structured identically to \code{po}, with "0" for occurrence (not implying absence, but denoting a background record in a way suited to most modelling methods) and \code{NA} for group.
 
-\code{env} includes site names, coordinates, and site values for 13 environmental variables (below). Since these survey data come from different surveys for each biological group (from 570 to 2075 sites per group), there are eight separate datasets. This set of files is suited to making predictions. 
+\code{env} (testing data) includes group, site names, coordinates, and site values for 13 environmental variables (below). These are for sites from different surveys for each biological group (from 570 to 2075 sites per group), and can be returned as separate datasets by \code{disEnv}, or in one long format dataset by \code{disData}. This set of files is suited to making predictions.
 
-\code{pa} includes site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{distPa}. The sites are identical to the sites in \code{env}, and again there are separate files for each group. This set of files is suited to evaluating the predictions made to \code{env}.
+\code{pa} (testing data) includes group, site names, coordinates, and presence-absence records, one column per species (in the wide format returned by \code{disPa}). They can also be returned in long format using \code{disData}. The sites are identical to the sites in \code{env}. These data are suited to evaluating the predictions made with \code{env}.
 
-Raster (gridded) data for all environmental variables are available - see the reference below for details. 
+Raster (gridded) data for all environmental variables are available - see the reference below for details.
 
 The reference system of the x and y coordinates is unprojected. Latitude and longitude are in geographical coordinates using the WGS84 datum (EPSG:4326).
 
-The vignette provided with this package provides an example of how to fit and evaluate a model with these data. 
+The vignette provided with this package provides an example of how to fit and evaluate a model with these data.
 
 \strong{Environmental variables:}
-\tabular{llll}{  
+\tabular{llll}{
 \strong{Code} \tab \strong{Description} \tab \strong{Units} \tab \strong{Type} \cr
 
 cti      \tab "compound topographic index" - a quantification of the position of a site in the local landscape. It is often referred to as the steady state wetness index and it is defined as: CTI = ln ( As / tanB ) where 'As' is the specific catchment area expressed as m2 per unit width orthogonal to the flow direction and 'B' is the slope angle \tab \tab Continuous\cr
@@ -67,8 +67,20 @@ Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A.,
 
 
 \examples{
-x <- disData('NSW')
-sapply(x, head)
+nsw_po <- disPo("NSW")
+nsw_bg <- disBg("NSW")
+
+nsw_pa_bat <- disPa("NSW", "ba")
+nsw_env_bat <- disEnv("NSW", "ba")
+nsw_pa_reptile <- disPa("NSW", "sr")
+nsw_env_reptile <- disEnv("NSW", "sr")
+
+
+# Or all in one list
+nsw <- disData("NSW")
+sapply(nsw, head)
+
+disCRS("NSW")
 }
 
 \keyword{datasets}

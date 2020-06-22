@@ -12,16 +12,16 @@ Data for species distribution modeling
 \description{
 This package allows for easy use of a collection of datasets that can be used to compare species distribution models. There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models.
 
-The data were compiled and used by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA. Full details of the dataset are provided in the first publication listed below, from the NCEAS data group. 
+The data were compiled and used by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA. Full details of the dataset are provided in the first publication listed below, from the NCEAS data group.
 }
 
 \details{
-The data are fully described in the first publication listed below, and also supplied with metadata on Open Science Framework (OSF). On the OSF site, rasters (gridded data) of all environmental data are also available for download. 
+The data are fully described in the first publication listed below, and also supplied with metadata on Open Science Framework (OSF). On the OSF site, rasters (gridded data) of all environmental data are also available for download.
 }
 
 
 \author{
-Package by Robert J. Hijmans, Roozbeh Valavi, and Jane Elith. Data collation and processing by the NCEAS data group (see first reference below, and the manual package for specific datasets). 
+Package by Robert J. Hijmans, Roozbeh Valavi, and Jane Elith. Data collation and processing by the NCEAS data group (see first reference below, and the manual package for specific datasets).
 }
 
 \references{
@@ -49,7 +49,7 @@ Other papers using these data include:
     \item{Phillips, S. J., Anderson, R. P., Dudík, M., Schapire, R. E. & Blair, M. E. Opening the black box: an open-source release of Maxent. Ecography 40, 887-893 (2017).}
     \item{Wisz, M. S. et al. Effects of sample size on the performance of species distribution models. Diversity and Distributions 14, 763-773 (2008).}
 }
-    
+
 }
 
 \keyword{ package }
