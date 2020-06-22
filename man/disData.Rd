@@ -76,6 +76,11 @@ names(x)
 
 sapply(x, head)
 
+
+z <- disBorder("NSW")
+
+plot(z)
+
 }
 
 \keyword{data}
