@@ -10,8 +10,10 @@ This package consists of a collection of datasets that can be used to compare sp
 
 You can install the package from `R` with the `remotes` package. Like this
 
+```
 library(remotes)
 remotes::install_github("rspatial/disdat")
+```
 
 ## Citation
 
