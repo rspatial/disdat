@@ -16,6 +16,6 @@ remotes::install_github("rspatial/disdat")
 
 ## Citation
 
-To cite **disdat** package and its data in publications, please use:
+To cite the use of the data and the **disdat** package in publications, please use:
 
 Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In Press. **Presence-only and presence-absence data for comparing species distribution modeling methods.** Biodiversity Informatics 19: 69-81.
