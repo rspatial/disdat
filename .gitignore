@@ -1,8 +1,3 @@
-inst/extdata/*.rds
-!inst/extdata/CAN*
-inst/extdata/borders/*.gpkg
-!inst/extdata/borders/can.gpkg
-!inst/extdata/borders/nsw.gpkg
 *.tar.gz
 *Rcheck/
 *.o
