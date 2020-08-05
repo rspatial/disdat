@@ -16,4 +16,4 @@ Authors@R: c(
 			email = "r.hijmans@gmail.com", comment = c(ORCID = "0000-0001-5872-2872")),
     person("Roozbeh", "Valavi", role = "aut"),
     person("Jane", "Elith",  role = "aut"))
-Description: Easy access to species distribution data for 6 regions in the world, for a total of 226 anonymised species. These data were first used by Elith et al (2006) <10.1111/j.2006.0906-7590.04596.x> to compare species distribution modelling methods; and have been used in several other studies as well. 
+Description: Easy access to species distribution data for 6 regions in the world, for a total of 226 anonymised species. These data are described and made available by Elith et al (2020) <doi.org/10.17161/bi.v15i2.13384> to compare species distribution modelling methods. 
