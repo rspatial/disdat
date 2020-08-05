@@ -37,6 +37,10 @@ disCRS <- function(region, format="proj4") {
 		ifelse (format=="proj4",
 		"+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +towgs84=59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993 +units=m",
 		"EPSG:27200")
+	} else if (region=="SWI") {
+	  ifelse (format=="proj4",
+	          "+proj=tmerc +lat_0=46.95228333333333 +lon_0=7.439583333333333 +k=1 +x_0=600000 +y_0=200000 +ellps=bessel +units=m +no_defs",
+	          "EPSG:21781")
 	} else {
 		ifelse (format=="proj4",
 		"+proj=longlat +datum=WGS84",
