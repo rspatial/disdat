@@ -12,8 +12,8 @@ Suggests: knitr, rmarkdown, sf, terra, raster, rgdal, mapview
 VignetteBuilder: knitr
 NeedsCompilation: no
 Authors@R: c(
-	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
+	person("Robert J.", "Hijmans", role = "aut",  
 			email = "r.hijmans@gmail.com", comment = c(ORCID = "0000-0001-5872-2872")),
-    person("Roozbeh", "Valavi", role = "aut", email = "valavi.r@gmail.com"),
-    person("Jane", "Elith",  role = "aut"))
+    person("Roozbeh", "Valavi", role = c("cre", "aut"), email = "valavi.r@gmail.com"),
+    person("Jane", "Elith",  role = "aut", email = "j.elith@gmail.com"))
 Description: Easy access to species distribution data for 6 regions in the world, for a total of 226 anonymised species. These data are described and made available by Elith et al (2020) <doi.org/10.17161/bi.v15i2.13384> to compare species distribution modelling methods. 
