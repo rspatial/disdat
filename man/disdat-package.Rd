@@ -28,7 +28,7 @@ Package by Robert J. Hijmans, Roozbeh Valavi, and Jane Elith. Data collation and
 The main reference for the these data is:
 
 \itemize{
-    \item{Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ferrier, S., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., In Press. Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics 15:69-80.}
+    \item{Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ferrier, S., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E., (2020). Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics 15:69-80.}
 }
 
 
