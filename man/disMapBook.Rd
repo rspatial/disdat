@@ -38,5 +38,5 @@ disMapBook(c("AWT", "NSW"), "~/Desktop/sp_mapbook.pdf")
 }
 }
 
-\keyword{Map, spatial}
-
+\keyword{map}
+\keyword{spatial}
