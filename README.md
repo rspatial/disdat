@@ -7,7 +7,9 @@ This package consists of a collection of datasets that can be used to compare sp
 
 ## Installation
 
-You can install the package from `R` with the `remotes` package. Like this
+The package is [available from CRAN](https://cran.r-project.org/web/packages/disdat/index.html). You can install it with `install.packages("disdat")`. 
+
+To install the github development version, you can use the `remotes` package like this
 
 ```
 library(remotes)
