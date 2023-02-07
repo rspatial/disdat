@@ -12,7 +12,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = TRUE, eval = FALSE, tidy.opts=list(width.cutoff=80), fig.align="center")
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, fig.align="center")
 ```
 
 This document provides example code for understanding and visualising the NCEAS data within the  `disdat` package. This html file is created using R markdown. The code in the grey shaded areas that is not preceded by # can be copied and run in R. The code preceded by ## simply shows what the code above it returns. 

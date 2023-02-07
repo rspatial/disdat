@@ -17,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE, tidy = TRUE, tidy.opts=list(width.cutoff=80))
 
 ## Introduction
 
-The `disdat` package is primarily a data package, supplying the data described in Elith *et al.* (in press). There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models. These data were compiled by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA (project ID: 4980). That group, or subsets of its members, have published 13 papers using some or all of the data for various explorations of model performance. Those papers are detailed in Elith *et al.* (in press). 
+The `disdat` package is primarily a data package, supplying the data described in Elith *et al.* (2020). There are data for 6 regions in the world, for a total of 226 anonymised species including birds, vascular plants, reptiles and bats. Each data set has presence-only (and optionally background) training data to build models, and presence/absence data to evaluate models. These data were compiled by a species distribution modeling working group sponsored by the National Center for Ecological Analysis and Synthesis (NCEAS), at UC Santa Barbara, USA (project ID: 4980). That group, or subsets of its members, have published 13 papers using some or all of the data for various explorations of model performance. Those papers are detailed in Elith *et al.* (2020). 
 
-The data are now released both on Open Science Framework primarily as .csv files (link supplied in first reference, below) and here as an R package. Both sets of data are similar; in addition the OSF dataset includes raster files not supplied here (561MB zipped) and additional metadata files. Elith *et al.* (in press) detail the background to the data including suppliers, sources of both species and environmental data, steps for cleaning and preparation for modeling. Some of that information is also provided in the help files in this package, but note that Elith *et al.* (in press) provide the full documentation needed to understand the data.
+The data are now released both on Open Science Framework primarily as .csv files (link supplied in first reference, below) and here as an R package. Both sets of data are similar; in addition the OSF dataset includes raster files not supplied here (561MB zipped) and additional metadata files. Elith *et al.* (2020) detail the background to the data including suppliers, sources of both species and environmental data, steps for cleaning and preparation for modeling. Some of that information is also provided in the help files in this package, but note that Elith *et al.* (2020) provide the full documentation needed to understand the data.
 
 Several functions are supplied, with help pages, in the `disdat` package, to load the data into your workspace or get it for modelling: `disPo`, `disBg`, `disPa`, `disEnv` and `disBorder`. The help files explain the nuances of these, and give examples of their application to load all data from all regions, or subsets of it. A function `disPredictors` returns the names of all predictor variables in the dataset and `disCRS` returns the information about coordinate reference system of each region.  
 
@@ -38,7 +38,7 @@ In this section, code is provided as an example of one approach for using these 
 As you read the code you will notice two things:
 1. for any one region and biological group, the evaluation data comes in two files: environmental data, that can be predicted to, and species data, for evaluating the predictions. 
 2. that two regions (AWT and NSW) have more than one set of evaluation files, because there is more than one biological group (and therefore more than one set of surveys) for those regions. 
-Both these points are explained in the help files for the data, and in Elith *et al.* (in press).
+Both these points are explained in the help files for the data, and in Elith *et al.* (2020).
 
 The way we organise the species data for modeling suits the `randomForest` package - each modeling method has different requirements. 
 
@@ -207,13 +207,13 @@ The code below assumes you have set your working directory, and the environmenta
 
 Load the required packages:
 ```{r warning=F, message=F}
-library(raster)
+library(terra)
 ```
 
 Read in the data for NSW:
 ```{r eval=F}
 po <- disPo("NSW")
-nsw.raster <- raster("env_grids/nsw/mi.tif")
+nsw.raster <- rast("env_grids/nsw/mi.tif")
 ```
 
 Check how many groups and records in these PO data, and think about what target groups to propose. Here there are 8 groups (see main paper), but it is sensible to collapse some of these, given the way that recorders are likely to survey. Following Phillips *et al.* (2009) we propose four target groups: bat, bird, plant, reptile:
@@ -239,6 +239,6 @@ names(tgb.data) <- names(target.groups)
 ```
 
 ## References
-Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (in press) Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics.
+Elith, J., Graham, C.H., Valavi, R., Abegg, M., Bruce, C., Ferrier, S., Ford, A., Guisan, A., Hijmans, R.J., Huettmann, F., Lohmann, L.G., Loiselle, B.A., Moritz, C., Overton, J.McC., Peterson, A.T., Phillips, S., Richardson, K., Williams, S., Wiser, S.K., Wohlgemuth, T. & Zimmermann, N.E. (2020) Presence-only and presence-absence data for comparing species distribution modeling methods. Biodiversity Informatics, 15, 69-80.
 
 Phillips, S.J., Dudík, M., Elith, J., Graham, C.H., Lehmann, A., Leathwick, J. & Ferrier, S. (2009) Sample selection bias and presence-only distribution models: implications for background and pseudo-absence data. Ecological Applications, 19, 181–197.
