@@ -8,7 +8,7 @@ License: GPL (>=3)
 Encoding: UTF-8
 LazyLoad: yes
 Depends: R (>= 3.5.0)
-Suggests: knitr, rmarkdown, sf, terra, tmap, mapview
+Suggests: knitr, rmarkdown, terra, sf, tmap, mapview
 VignetteBuilder: knitr
 NeedsCompilation: no
 Authors@R: c(
