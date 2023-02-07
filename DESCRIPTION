@@ -1,14 +1,14 @@
 Package: disdat
 Type: Package
 Title: Data for Comparing Species Distribution Modeling Methods
-Version: 1.0-0
-Date: 2020-08-07
+Version: 1.0-1
+Date: 2023-02-07
 Maintainer: Roozbeh Valavi <valavi.r@gmail.com>
 License: GPL (>=3)
 Encoding: UTF-8
 LazyLoad: yes
 Depends: R (>= 3.5.0)
-Suggests: knitr, rmarkdown, sf, terra, raster, rgdal, mapview
+Suggests: knitr, rmarkdown, sf, terra, tmap, mapview
 VignetteBuilder: knitr
 NeedsCompilation: no
 Authors@R: c(

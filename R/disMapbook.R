@@ -6,19 +6,6 @@
 
 disMapBook <- function(region, output_pdf, verbose = TRUE){
 
-  # # check for availability of sf
-  # pkg <- c("sf")
-  # pkgna <- names(which(sapply(sapply(pkg, find.package, quiet = TRUE), length) == 0))
-  # if(length(pkgna) > 0){
-  #   message("This function requires ", pkg, " package for plotting.", "\nWould you like to install it now?\n1: yes\n2: no")
-  #   user <- readline(prompt = paste0("Selection: "))
-  #   if(tolower(user) %in% c("1", "yes", "y")){
-  #     utils::install.packages(pkgna)
-  #   } else{
-  #     stop("Please install sf package.")
-  #   }
-  # }
-
   regions <- unique(toupper(unlist(region)))
   if(regions[1] == 'ALL'){
     regions <- c('AWT', 'CAN', 'NSW', 'NZ', 'SA', 'SWI')

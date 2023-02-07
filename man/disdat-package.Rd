@@ -47,6 +47,9 @@ Other papers using these data include:
     \item{Phillips, S. J. & Elith, J. (2010). POC-plots: calibrating species distribution models with presence-only data. Ecology 91, 2476-2484.}
     \item{Phillips, S.J., Dudík, M., Elith, J., Graham, C.H., Lehmann, A., Leathwick, J., Ferrier, S. (2009). Sample selection bias and presence-only distribution models: implications for background and pseudo-absence data. Ecological Applications 19, 181–197.}
     \item{Phillips, S. J., Anderson, R. P., Dudík, M., Schapire, R. E. & Blair, M. E. (2017). Opening the black box: an open-source release of Maxent. Ecography 40, 887-893.}
+    \item{Valavi, R., Elith, J., Lahoz‐Monfort, J.J. & Guillera‐Arroita, G. (2023). Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography, geb.13639.}
+    \item{Valavi, R., Elith, J., Lahoz‐Monfort, J.J. & Guillera‐Arroita, G. (2021). Modelling species presence‐only data with random forests. Ecography, 44, 1731–1742.}
+    \item{Valavi, R., Guillera‐Arroita, G., Lahoz‐Monfort, J.J. & Elith, J. (2022). Predictive performance of presence‐only species distribution models: a benchmark study with reproducible code. Ecological Monographs, 92(1). 10.1002/ecm.1486}
     \item{Wisz, M.S., Hijmans, R.J., Li, J., Peterson, A.T., Graham, C.H., Guisan, A., & NCEAS Species Distribution Modelling Group (2008). Effects of sample size on the performance of species distribution models. Diversity and Distributions 14, 763–773.}
 }
 
