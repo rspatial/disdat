@@ -8,7 +8,7 @@ disBorder <- function(region, pkg="sf"){
 	if (pkg == "sf") {
 		bor <- sf::st_read(d, quiet = TRUE)
 	} else {
-		bor <- terra::vect(d, quiet = TRUE)
+		bor <- terra::vect(d)
 	}
 	return(bor)
 }
