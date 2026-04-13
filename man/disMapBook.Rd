@@ -34,7 +34,7 @@ disMapBook(region, output_pdf, verbose = TRUE)
 
 
 \examples{\donttest{
-disMapBook(c("AWT", "NSW"), "~/Desktop/sp_mapbook.pdf")
+disMapBook(c("AWT", "NSW"), file.path(tempdir(), "sp_mapbook.pdf"))
 }
 }
 
