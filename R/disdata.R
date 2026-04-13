@@ -19,7 +19,7 @@
 
 
 .reshape_pa <- function(x) {
-	r <- stats::reshape(x, varying=colnames(x)[-c(1:3)], times=colnames(x)[-c(1:3)], v.names="pa", timevar="spid", direction="long")
+	r <- stats::reshape(x, varying=colnames(x)[-c(1:4)], times=colnames(x)[-c(1:4)], v.names="pa", timevar="spid", direction="long")
 	r$id = NULL
 	rownames(r) <- NULL
 	r
