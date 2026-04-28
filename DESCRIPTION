@@ -17,3 +17,4 @@ Authors@R: c(
     person("Roozbeh", "Valavi", role = c("cre", "aut"), email = "valavi.r@gmail.com"),
     person("Jane", "Elith",  role = "aut", email = "j.elith@gmail.com"))
 Description: Easy access to species distribution data for 6 regions in the world, for a total of 226 anonymised species. These data are described and made available by Elith et al (2020) <doi:10.17161/bi.v15i2.13384> to compare species distribution modelling methods. 
+RoxygenNote: 7.3.3

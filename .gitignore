@@ -8,4 +8,5 @@
 *.dll
 *.zip
 .Rproj.user
+*.Rproj
 

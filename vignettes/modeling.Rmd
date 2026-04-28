@@ -12,7 +12,7 @@ vignette: >
 ---
   
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = TRUE, tidy.opts=list(width.cutoff=80))
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
