@@ -1,6 +1,8 @@
 # disdat
 
+[![CRAN version](https://www.r-pkg.org/badges/version/disdat)](https://CRAN.R-project.org/package=disdat)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/disdat)](https://CRAN.R-project.org/package=disdat)
+[![Biodiversity Informatics](https://img.shields.io/badge/Biodiversity%20Informatics-15,%2069--80-blue.svg)](https://doi.org/10.17161/bi.v15i2.13384)
 
 ## Data for Evaluating Species Distribution Modelling Methods
 
